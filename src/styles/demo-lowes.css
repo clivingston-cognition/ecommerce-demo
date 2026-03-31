@@ -1,0 +1,187 @@
+/*
+ * Lowes-inspired color overrides for DEMO mode.
+ * Applied via a `data-demo="lowes"` attribute on <html>.
+ * Navy blue primary, white backgrounds, clean product-grid aesthetic.
+ */
+
+[data-demo="lowes"] {
+  /* Reset to light mode */
+  color-scheme: light;
+}
+
+[data-demo="lowes"] body {
+  color: #1a1a2e;
+  background: #ffffff;
+}
+
+/* ── Navbar ─────────────────────────────────────────── */
+[data-demo="lowes"] header {
+  background: #003da5 !important; /* Lowes navy blue */
+  border-bottom: 3px solid #002d7a !important;
+}
+
+[data-demo="lowes"] header * {
+  color: #ffffff;
+}
+
+[data-demo="lowes"] header a:hover,
+[data-demo="lowes"] header button:hover {
+  opacity: 0.85;
+}
+
+/* Search bar in navbar */
+[data-demo="lowes"] header input {
+  background: #ffffff;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 4px;
+}
+
+[data-demo="lowes"] header input::placeholder {
+  color: #6b7280;
+}
+
+/* ── Footer ─────────────────────────────────────────── */
+[data-demo="lowes"] footer {
+  background: #1a1a2e !important;
+  border-color: #2d2d4e !important;
+}
+
+[data-demo="lowes"] footer * {
+  color: #d1d5db;
+}
+
+[data-demo="lowes"] footer h2 {
+  color: #ffffff;
+}
+
+/* ── Product cards ──────────────────────────────────── */
+[data-demo="lowes"] .demo-product-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+[data-demo="lowes"] .demo-product-card:hover {
+  box-shadow: 0 4px 20px rgba(0, 61, 165, 0.12);
+  transform: translateY(-2px);
+}
+
+[data-demo="lowes"] .demo-product-card .demo-card-body {
+  padding: 12px 16px 16px;
+  background: #ffffff;
+}
+
+[data-demo="lowes"] .demo-product-card .demo-card-body h2 {
+  color: #1a1a2e;
+  font-weight: 600;
+}
+
+[data-demo="lowes"] .demo-product-card .demo-card-body .demo-price {
+  color: #003da5;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+[data-demo="lowes"] .demo-product-card .demo-card-body .demo-desc {
+  color: #6b7280;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+/* ── Hero banner ────────────────────────────────────── */
+[data-demo="lowes"] .demo-hero {
+  background: linear-gradient(135deg, #003da5 0%, #0052cc 50%, #004db3 100%);
+  color: #ffffff;
+}
+
+[data-demo="lowes"] .demo-hero-cta {
+  background: #ffffff;
+  color: #003da5;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 12px 32px;
+  display: inline-block;
+  transition: background 0.2s ease;
+}
+
+[data-demo="lowes"] .demo-hero-cta:hover {
+  background: #e6efff;
+}
+
+/* ── Category cards ─────────────────────────────────── */
+[data-demo="lowes"] .demo-category-card {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+[data-demo="lowes"] .demo-category-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 61, 165, 0.1);
+}
+
+[data-demo="lowes"] .demo-category-card h3 {
+  color: #003da5;
+  font-weight: 700;
+}
+
+[data-demo="lowes"] .demo-category-card p {
+  color: #6b7280;
+}
+
+/* ── Section headings ───────────────────────────────── */
+[data-demo="lowes"] .demo-section-heading {
+  color: #1a1a2e;
+  font-weight: 700;
+  border-bottom: 3px solid #003da5;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+/* ── Promo bar ──────────────────────────────────────── */
+[data-demo="lowes"] .demo-promo-bar {
+  background: #002d7a;
+  color: #ffffff;
+  text-align: center;
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ── Badge ──────────────────────────────────────────── */
+[data-demo="lowes"] .demo-badge {
+  background: #dc2626;
+  color: #ffffff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+/* ── Rating stars ───────────────────────────────────── */
+[data-demo="lowes"] .demo-stars {
+  color: #f59e0b;
+}
+
+/* ── Main content area text color ───────────────────── */
+[data-demo="lowes"] main {
+  color: #1a1a2e;
+}
+
+/* ── Override dark-theme defaults from globals.css ──── */
+[data-demo="lowes"] .text-color-secondary {
+  color: #6b7280 !important;
+}
+
+[data-demo="lowes"] .bg-background-secondary {
+  background-color: #ffffff !important;
+}
+
+[data-demo="lowes"] .border-border-primary {
+  border-color: #e5e7eb !important;
+}
