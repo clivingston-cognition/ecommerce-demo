@@ -21,7 +21,7 @@ function Stars({ rating }: { rating: number }) {
 
 /** Deterministic pseudo-random from product id for consistent rendering */
 function seededRating(id: number): number {
-  return 4 + ((id * 7 + 3) % 10) / 10;
+  return 3 + ((id * 7 + 3) % 10) / 10 * 2;
 }
 
 function seededReviewCount(id: number): number {
