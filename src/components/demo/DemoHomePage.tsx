@@ -1,6 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
-import { demoProducts, demoCategories } from "@/lib/demo-data";
+import {
+  demoProducts,
+  demoSearchSuggestions,
+  demoDealCards,
+  demoLifestyleSections,
+  demoPopularCategories,
+} from "@/lib/demo-data";
 
 /** Star rating display */
 function Stars({ rating }: { rating: number }) {
@@ -22,8 +28,12 @@ function seededReviewCount(id: number): number {
   return 50 + ((id * 137 + 29) % 450);
 }
 
-/** Individual product card */
-function DemoProductCard({
+function seededBoughtCount(id: number): number {
+  return 100 + ((id * 53 + 17) % 900);
+}
+
+/** Product card for horizontal carousel */
+function CarouselProductCard({
   product,
 }: {
   product: (typeof demoProducts)[number];
@@ -31,25 +41,27 @@ function DemoProductCard({
   const productLink = `/${product.category}/${product.id}?variant=${product.variants[0].color}`;
 
   return (
-    <Link href={productLink} className="block demo-product-card">
-      <div className="relative aspect-[4/3] overflow-hidden">
+    <Link href={productLink} className="demo-carousel-card">
+      <div className="relative aspect-square overflow-hidden">
         <Image
           src={product.img}
           alt={product.name}
           fill
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          sizes="220px"
           className="object-cover"
         />
         {product.price > 200 && (
           <span className="absolute top-2 left-2 demo-badge">Top Seller</span>
         )}
       </div>
-      <div className="demo-card-body">
-        <h2 className="text-sm leading-tight mb-1 line-clamp-2">
+      <div className="demo-carousel-card-body">
+        <p className="demo-carousel-bought">
+          {seededBoughtCount(product.id)} bought last week
+        </p>
+        <h3 className="text-sm leading-tight mb-1 line-clamp-2 font-medium">
           {product.name}
-        </h2>
-        <p className="demo-desc line-clamp-2 mb-2">{product.description}</p>
-        <div className="flex items-center gap-2 mb-1">
+        </h3>
+        <div className="flex items-center gap-1 mb-1">
           <Stars rating={seededRating(product.id)} />
           <span className="text-xs text-gray-400">
             ({seededReviewCount(product.id)})
@@ -68,62 +80,42 @@ function DemoProductCard({
 
 export const DemoHomePage = () => {
   return (
-    <div className="-mx-6 sm:-mx-12">
-      {/* Hero Banner */}
-      <section className="demo-hero px-6 sm:px-12 py-16 sm:py-24">
-        <div className="max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center gap-8">
-          <div className="flex-1 text-center sm:text-left">
-            <h1 className="text-3xl sm:text-5xl font-bold leading-tight mb-4">
-              Spring Into Savings
-            </h1>
-            <p className="text-lg sm:text-xl opacity-90 mb-8 max-w-lg">
-              Get your home ready for the season with deals on tools, appliances,
-              and outdoor essentials.
-            </p>
-            <Link href="/t-shirts" className="demo-hero-cta text-sm uppercase tracking-wider">
-              Shop All Deals
-            </Link>
-          </div>
-          <div className="flex-1 relative hidden md:block">
-            <div className="relative w-full aspect-[16/10] rounded-lg overflow-hidden shadow-2xl">
-              <Image
-                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=500&fit=crop"
-                alt="Home improvement tools on workbench"
-                fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 768px) 0vw, 50vw"
-              />
-            </div>
+    <div className="demo-home">
+      {/* Section 1: Recommended Searches */}
+      <section className="demo-search-pills-section">
+        <div className="demo-search-pills-wrap">
+          <span className="demo-search-pills-label">Recommended Searches</span>
+          <div className="demo-search-pills">
+            {demoSearchSuggestions.map((term) => (
+              <Link key={term} href="#" className="demo-pill">
+                {term}
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="px-6 sm:px-12 py-12">
-        <div className="max-w-screen-xl mx-auto">
-          <h2 className="demo-section-heading text-2xl mb-8">
-            Shop by Department
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {demoCategories.map((cat) => (
-              <Link
-                key={cat.slug}
-                href={`/${cat.slug}`}
-                className="demo-category-card group"
-              >
-                <div className="relative aspect-[2/1] overflow-hidden">
+      {/* Section 2: Deal Cards Grid */}
+      <section className="demo-deals-section">
+        <div className="demo-section-inner">
+          <div className="demo-deals-grid">
+            {demoDealCards.map((deal) => (
+              <Link key={deal.title} href={deal.link} className="demo-deal-card">
+                <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
-                    src={cat.image}
-                    alt={cat.label}
+                    src={deal.image}
+                    alt={deal.title}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                    className="object-cover"
                   />
                 </div>
-                <div className="p-4">
-                  <h3 className="text-lg mb-1">{cat.label}</h3>
-                  <p className="text-sm">{cat.description}</p>
+                <div className="demo-deal-card-body">
+                  <h3 className="font-bold text-sm">{deal.title}</h3>
+                  <p className="demo-deal-price">{deal.price}</p>
+                  {deal.unit && (
+                    <p className="text-xs text-gray-500">{deal.unit}</p>
+                  )}
                 </div>
               </Link>
             ))}
@@ -131,67 +123,114 @@ export const DemoHomePage = () => {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="px-6 sm:px-12 py-12">
-        <div className="max-w-screen-xl mx-auto">
-          <h2 className="demo-section-heading text-2xl mb-8">
-            Featured Products
+      {/* Section 3: Shop Fresh Savings for Spring - Product Carousel */}
+      <section className="demo-carousel-section">
+        <div className="demo-section-inner">
+          <h2 className="demo-section-heading">
+            Shop Fresh Savings for Spring
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {demoProducts.slice(0, 8).map((product) => (
-              <DemoProductCard key={product.id} product={product} />
+          <div className="demo-carousel-tabs">
+            <button type="button" className="demo-tab demo-tab-active">Top Picks</button>
+            <button type="button" className="demo-tab">Outdoors</button>
+            <button type="button" className="demo-tab">Plumbing</button>
+            <button type="button" className="demo-tab">Flooring</button>
+            <button type="button" className="demo-tab">Building Supplies</button>
+            <button type="button" className="demo-tab">Storage</button>
+            <button type="button" className="demo-tab">Paint</button>
+            <button type="button" className="demo-tab">Electrical</button>
+            <button type="button" className="demo-tab">Home Decor</button>
+            <button type="button" className="demo-tab">Kitchen</button>
+          </div>
+          <div className="demo-carousel-scroll">
+            {demoProducts.map((product) => (
+              <CarouselProductCard key={product.id} product={product} />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Value Props Banner */}
-      <section className="px-6 sm:px-12 py-10 bg-gray-50">
-        <div className="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-          <div className="p-4">
-            <div className="text-2xl mb-2">&#x1F69A;</div>
-            <h3 className="text-sm font-bold mb-1" style={{ color: "#1a1a2e" }}>
-              Free Shipping
-            </h3>
-            <p className="text-xs text-gray-500">On orders over $45</p>
+      {/* Section 4-6: Lifestyle 2-Card Sections */}
+      {demoLifestyleSections.map((section) => (
+        <section key={section.heading} className="demo-lifestyle-section">
+          <div className="demo-section-inner">
+            <h2 className="demo-section-heading">{section.heading}</h2>
+            <div className="demo-lifestyle-grid">
+              {section.cards.map((card) => (
+                <Link key={card.title} href={card.link} className="demo-lifestyle-card group">
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image
+                      src={card.image}
+                      alt={card.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="demo-lifestyle-card-body">
+                    <h3 className="font-bold text-lg mb-1">{card.title}</h3>
+                    <p className="text-sm text-gray-600">{card.description}</p>
+                    <span className="demo-lifestyle-shop-link">
+                      Shop Now &gt;
+                    </span>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
-          <div className="p-4">
-            <div className="text-2xl mb-2">&#x1F527;</div>
-            <h3 className="text-sm font-bold mb-1" style={{ color: "#1a1a2e" }}>
-              Expert Advice
-            </h3>
-            <p className="text-xs text-gray-500">
-              In-store and online help
-            </p>
-          </div>
-          <div className="p-4">
-            <div className="text-2xl mb-2">&#x1F4B0;</div>
-            <h3 className="text-sm font-bold mb-1" style={{ color: "#1a1a2e" }}>
-              Price Match
-            </h3>
-            <p className="text-xs text-gray-500">
-              Guaranteed lowest prices
-            </p>
-          </div>
-          <div className="p-4">
-            <div className="text-2xl mb-2">&#x21A9;&#xFE0F;</div>
-            <h3 className="text-sm font-bold mb-1" style={{ color: "#1a1a2e" }}>
-              Easy Returns
-            </h3>
-            <p className="text-xs text-gray-500">90-day return policy</p>
+        </section>
+      ))}
+
+      {/* Section 7: Popular Categories Grid */}
+      <section className="demo-popular-section">
+        <div className="demo-section-inner">
+          <h2 className="demo-section-heading">Popular Categories</h2>
+          <div className="demo-popular-grid">
+            {demoPopularCategories.map((cat) => (
+              <Link key={cat.label} href={`/${cat.slug}`} className="demo-popular-item">
+                <div className="demo-popular-icon">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="3" y="3" width="7" height="7" />
+                    <rect x="14" y="3" width="7" height="7" />
+                    <rect x="14" y="14" width="7" height="7" />
+                    <rect x="3" y="14" width="7" height="7" />
+                  </svg>
+                </div>
+                <span className="text-xs text-center font-medium leading-tight">
+                  {cat.label}
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* More Products */}
-      <section className="px-6 sm:px-12 py-12">
-        <div className="max-w-screen-xl mx-auto">
-          <h2 className="demo-section-heading text-2xl mb-8">
-            More to Explore
+      {/* Section 8: Projects & Updates */}
+      <section className="demo-projects-section">
+        <div className="demo-section-inner">
+          <h2 className="demo-section-heading">
+            Renew Your Home With Projects &amp; Updates
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {demoProducts.slice(8).map((product) => (
-              <DemoProductCard key={product.id} product={product} />
+          <div className="demo-projects-grid">
+            {[
+              { title: "How to Build a Deck", image: "https://images.unsplash.com/photo-1591825729269-caeb344f6df2?w=400&h=300&fit=crop" },
+              { title: "Bathroom Remodel Ideas", image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&h=300&fit=crop" },
+              { title: "Paint Color Inspiration", image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=300&fit=crop" },
+              { title: "Spring Lawn Care Tips", image: "https://images.unsplash.com/photo-1558906455-dba6c86b0b2c?w=400&h=300&fit=crop" },
+              { title: "Smart Home Setup Guide", image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop" },
+              { title: "Kitchen Renovation 101", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop" },
+            ].map((project) => (
+              <Link key={project.title} href="#" className="demo-project-card group">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 16vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <h3 className="text-sm font-medium mt-2">{project.title}</h3>
+              </Link>
             ))}
           </div>
         </div>

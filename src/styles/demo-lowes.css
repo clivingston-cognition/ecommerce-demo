@@ -1,11 +1,11 @@
 /*
- * Lowes-inspired color overrides for DEMO mode.
+ * Lowes.com exact layout CSS for DEMO mode.
  * Applied via a `data-demo="lowes"` attribute on <html>.
- * Navy blue primary, white backgrounds, clean product-grid aesthetic.
+ * Navy blue #003DA5 primary, white backgrounds.
  */
 
+/* ── Base ───────────────────────────────────────────── */
 [data-demo="lowes"] {
-  /* Reset to light mode */
   color-scheme: light;
 }
 
@@ -14,145 +14,361 @@
   background: #ffffff;
 }
 
-/* ── Navbar ─────────────────────────────────────────── */
-[data-demo="lowes"] header {
-  background: #003da5 !important; /* Lowes navy blue */
-  border-bottom: 3px solid #002d7a !important;
-}
-
-[data-demo="lowes"] header * {
-  color: #ffffff;
-}
-
-[data-demo="lowes"] header a:hover,
-[data-demo="lowes"] header button:hover {
-  opacity: 0.85;
-}
-
-/* Search bar in navbar */
-[data-demo="lowes"] header input {
-  background: #ffffff;
+[data-demo="lowes"] main {
   color: #1a1a2e;
-  border: none;
-  border-radius: 4px;
+  padding: 0 !important;
 }
 
-[data-demo="lowes"] header input::placeholder {
-  color: #6b7280;
-}
-
-/* ── Footer ─────────────────────────────────────────── */
-[data-demo="lowes"] footer {
-  background: #1a1a2e !important;
-  border-color: #2d2d4e !important;
-}
-
-[data-demo="lowes"] footer * {
-  color: #d1d5db;
-}
-
-[data-demo="lowes"] footer h2 {
-  color: #ffffff;
-}
-
-/* ── Product cards ──────────────────────────────────── */
-[data-demo="lowes"] .demo-product-card {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
-}
-
-[data-demo="lowes"] .demo-product-card:hover {
-  box-shadow: 0 4px 20px rgba(0, 61, 165, 0.12);
-  transform: translateY(-2px);
-}
-
-[data-demo="lowes"] .demo-product-card .demo-card-body {
-  padding: 12px 16px 16px;
-  background: #ffffff;
-}
-
-[data-demo="lowes"] .demo-product-card .demo-card-body h2 {
-  color: #1a1a2e;
-  font-weight: 600;
-}
-
-[data-demo="lowes"] .demo-product-card .demo-card-body .demo-price {
-  color: #003da5;
-  font-weight: 700;
-  font-size: 1.125rem;
-}
-
-[data-demo="lowes"] .demo-product-card .demo-card-body .demo-desc {
-  color: #6b7280;
-  font-size: 0.8125rem;
-  line-height: 1.4;
-}
-
-/* ── Hero banner ────────────────────────────────────── */
-[data-demo="lowes"] .demo-hero {
-  background: linear-gradient(135deg, #003da5 0%, #0052cc 50%, #004db3 100%);
-  color: #ffffff;
-}
-
-[data-demo="lowes"] .demo-hero-cta {
-  background: #ffffff;
-  color: #003da5;
-  font-weight: 700;
-  border-radius: 4px;
-  padding: 12px 32px;
-  display: inline-block;
-  transition: background 0.2s ease;
-}
-
-[data-demo="lowes"] .demo-hero-cta:hover {
-  background: #e6efff;
-}
-
-/* ── Category cards ─────────────────────────────────── */
-[data-demo="lowes"] .demo-category-card {
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  overflow: hidden;
-  transition: box-shadow 0.2s ease;
-}
-
-[data-demo="lowes"] .demo-category-card:hover {
-  box-shadow: 0 2px 12px rgba(0, 61, 165, 0.1);
-}
-
-[data-demo="lowes"] .demo-category-card h3 {
-  color: #003da5;
-  font-weight: 700;
-}
-
-[data-demo="lowes"] .demo-category-card p {
-  color: #6b7280;
-}
-
-/* ── Section headings ───────────────────────────────── */
-[data-demo="lowes"] .demo-section-heading {
-  color: #1a1a2e;
-  font-weight: 700;
-  border-bottom: 3px solid #003da5;
-  display: inline-block;
-  padding-bottom: 6px;
-}
-
-/* ── Promo bar ──────────────────────────────────────── */
+/* ── Promo Bar (Row 1) ─────────────────────────────── */
 [data-demo="lowes"] .demo-promo-bar {
   background: #002d7a;
   color: #ffffff;
   text-align: center;
   padding: 8px 16px;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 500;
 }
 
-/* ── Badge ──────────────────────────────────────────── */
+[data-demo="lowes"] .demo-promo-bar-link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+[data-demo="lowes"] .demo-promo-bar-link:hover {
+  text-decoration: underline;
+}
+
+/* ── Header Main (Row 2) ──────────────────────────── */
+[data-demo="lowes"] .demo-header-main {
+  background: #003da5 !important;
+  padding: 0;
+}
+
+[data-demo="lowes"] .demo-header-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+[data-demo="lowes"] .demo-header-main,
+[data-demo="lowes"] .demo-header-main * {
+  color: #ffffff;
+}
+
+[data-demo="lowes"] .demo-store-selector,
+[data-demo="lowes"] .demo-zip-selector {
+  cursor: pointer;
+}
+
+[data-demo="lowes"] .demo-store-selector:hover,
+[data-demo="lowes"] .demo-zip-selector:hover {
+  opacity: 0.85;
+}
+
+/* Search input */
+[data-demo="lowes"] .demo-search-input {
+  background: #ffffff;
+  color: #1a1a2e;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 44px 10px 16px;
+  font-size: 0.875rem;
+}
+
+[data-demo="lowes"] .demo-search-input::placeholder {
+  color: #6b7280;
+}
+
+[data-demo="lowes"] .demo-search-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #003da5;
+  border: 2px solid #ffffff;
+  border-radius: 0 4px 4px 0;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+[data-demo="lowes"] .demo-search-btn:hover {
+  background: #002d7a;
+}
+
+/* Nav icons */
+[data-demo="lowes"] .demo-nav-icon {
+  color: #ffffff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+[data-demo="lowes"] .demo-nav-icon:hover {
+  opacity: 0.85;
+}
+
+/* ── Category Nav (Row 3) ─────────────────────────── */
+[data-demo="lowes"] .demo-category-nav {
+  background: #003da5;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 3px solid #002d7a;
+  overflow-x: auto;
+}
+
+[data-demo="lowes"] .demo-category-nav-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  white-space: nowrap;
+}
+
+[data-demo="lowes"] .demo-cat-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 14px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.15s;
+}
+
+[data-demo="lowes"] .demo-cat-link:hover {
+  border-bottom-color: #ffffff;
+}
+
+[data-demo="lowes"] .demo-cat-link-special {
+  font-weight: 700;
+}
+
+[data-demo="lowes"] .demo-cat-divider {
+  display: inline-block;
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 0 4px;
+  vertical-align: middle;
+}
+
+/* ── Home Page Container ──────────────────────────── */
+[data-demo="lowes"] .demo-home {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+[data-demo="lowes"] .demo-section-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Section Headings ─────────────────────────────── */
+[data-demo="lowes"] .demo-section-heading {
+  color: #1a1a2e;
+  font-weight: 700;
+  font-size: 1.375rem;
+  margin-bottom: 16px;
+  border-bottom: none;
+  display: block;
+  padding-bottom: 0;
+}
+
+/* ── Search Pills (Recommended Searches) ──────────── */
+[data-demo="lowes"] .demo-search-pills-section {
+  background: #f5f5f5;
+  padding: 12px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+[data-demo="lowes"] .demo-search-pills-wrap {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+[data-demo="lowes"] .demo-search-pills-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #1a1a2e;
+  white-space: nowrap;
+}
+
+[data-demo="lowes"] .demo-search-pills {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+[data-demo="lowes"] .demo-search-pills::-webkit-scrollbar {
+  display: none;
+}
+
+[data-demo="lowes"] .demo-pill {
+  display: inline-block;
+  padding: 6px 14px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: #1a1a2e;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+[data-demo="lowes"] .demo-pill:hover {
+  border-color: #003da5;
+  background: #eef3ff;
+}
+
+/* ── Deal Cards Grid ──────────────────────────────── */
+[data-demo="lowes"] .demo-deals-section {
+  padding: 24px 0;
+}
+
+[data-demo="lowes"] .demo-deals-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  [data-demo="lowes"] .demo-deals-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  [data-demo="lowes"] .demo-deals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+[data-demo="lowes"] .demo-deal-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #1a1a2e;
+  transition: box-shadow 0.2s;
+}
+
+[data-demo="lowes"] .demo-deal-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-demo="lowes"] .demo-deal-card-body {
+  padding: 10px 12px;
+}
+
+[data-demo="lowes"] .demo-deal-price {
+  color: #003da5;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+/* ── Product Carousel ─────────────────────────────── */
+[data-demo="lowes"] .demo-carousel-section {
+  padding: 32px 0;
+  background: #f9fafb;
+}
+
+[data-demo="lowes"] .demo-carousel-tabs {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e5e7eb;
+  scrollbar-width: none;
+}
+
+[data-demo="lowes"] .demo-carousel-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+[data-demo="lowes"] .demo-tab {
+  padding: 10px 20px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #6b7280;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+[data-demo="lowes"] .demo-tab:hover {
+  color: #003da5;
+}
+
+[data-demo="lowes"] .demo-tab-active {
+  color: #003da5;
+  border-bottom-color: #003da5;
+}
+
+[data-demo="lowes"] .demo-carousel-scroll {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+}
+
+[data-demo="lowes"] .demo-carousel-card {
+  flex: 0 0 200px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #1a1a2e;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+[data-demo="lowes"] .demo-carousel-card:hover {
+  box-shadow: 0 4px 16px rgba(0, 61, 165, 0.12);
+  transform: translateY(-2px);
+}
+
+[data-demo="lowes"] .demo-carousel-card-body {
+  padding: 10px 12px 14px;
+}
+
+[data-demo="lowes"] .demo-carousel-bought {
+  font-size: 0.6875rem;
+  color: #dc2626;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+[data-demo="lowes"] .demo-price {
+  color: #003da5;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+/* ── Badge ────────────────────────────────────────── */
 [data-demo="lowes"] .demo-badge {
   background: #dc2626;
   color: #ffffff;
@@ -163,17 +379,262 @@
   text-transform: uppercase;
 }
 
-/* ── Rating stars ───────────────────────────────────── */
+/* ── Stars ────────────────────────────────────────── */
 [data-demo="lowes"] .demo-stars {
   color: #f59e0b;
 }
 
-/* ── Main content area text color ───────────────────── */
-[data-demo="lowes"] main {
+/* ── Lifestyle 2-Card Sections ────────────────────── */
+[data-demo="lowes"] .demo-lifestyle-section {
+  padding: 32px 0;
+}
+
+[data-demo="lowes"] .demo-lifestyle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  [data-demo="lowes"] .demo-lifestyle-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+[data-demo="lowes"] .demo-lifestyle-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #1a1a2e;
+  transition: box-shadow 0.2s;
+}
+
+[data-demo="lowes"] .demo-lifestyle-card:hover {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+[data-demo="lowes"] .demo-lifestyle-card-body {
+  padding: 16px 20px 20px;
+}
+
+[data-demo="lowes"] .demo-lifestyle-shop-link {
+  display: inline-block;
+  margin-top: 8px;
+  color: #003da5;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+/* ── Popular Categories Grid ──────────────────────── */
+[data-demo="lowes"] .demo-popular-section {
+  padding: 32px 0;
+  background: #f9fafb;
+}
+
+[data-demo="lowes"] .demo-popular-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 768px) {
+  [data-demo="lowes"] .demo-popular-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  }
+}
+
+[data-demo="lowes"] .demo-popular-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 8px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #1a1a2e;
+  transition: box-shadow 0.15s, border-color 0.15s;
+}
+
+[data-demo="lowes"] .demo-popular-item:hover {
+  border-color: #003da5;
+  box-shadow: 0 2px 8px rgba(0, 61, 165, 0.1);
+}
+
+[data-demo="lowes"] .demo-popular-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef3ff;
+  border-radius: 50%;
+  color: #003da5;
+}
+
+/* ── Projects Section ─────────────────────────────── */
+[data-demo="lowes"] .demo-projects-section {
+  padding: 32px 0 48px;
+}
+
+[data-demo="lowes"] .demo-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 1024px) {
+  [data-demo="lowes"] .demo-projects-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  [data-demo="lowes"] .demo-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+[data-demo="lowes"] .demo-project-card {
+  text-decoration: none;
   color: #1a1a2e;
 }
 
-/* ── Override dark-theme defaults from globals.css ──── */
+[data-demo="lowes"] .demo-project-card:hover h3 {
+  color: #003da5;
+}
+
+/* ── Footer ───────────────────────────────────────── */
+[data-demo="lowes"] .demo-footer {
+  background: #1a1a2e !important;
+  border: none;
+  padding: 0;
+}
+
+[data-demo="lowes"] .demo-footer * {
+  color: #d1d5db;
+}
+
+[data-demo="lowes"] .demo-footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Footer top: newsletter */
+[data-demo="lowes"] .demo-footer-top {
+  background: #2d2d4e;
+  padding: 24px 0;
+}
+
+[data-demo="lowes"] .demo-footer-top .demo-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+[data-demo="lowes"] .demo-footer-email {
+  padding: 8px 14px;
+  border-radius: 4px;
+  border: 1px solid #6b7280;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.875rem;
+  width: 260px;
+}
+
+[data-demo="lowes"] .demo-footer-email::placeholder {
+  color: #9ca3af;
+}
+
+[data-demo="lowes"] .demo-footer-submit {
+  padding: 8px 20px;
+  border-radius: 4px;
+  border: 2px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+[data-demo="lowes"] .demo-footer-submit:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-demo="lowes"] .demo-app-badge {
+  padding: 4px 12px;
+  border: 1px solid #6b7280;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* Footer columns */
+[data-demo="lowes"] .demo-footer-columns {
+  padding: 32px 0;
+}
+
+[data-demo="lowes"] .demo-footer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  [data-demo="lowes"] .demo-footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+[data-demo="lowes"] .demo-footer-heading {
+  color: #ffffff !important;
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+[data-demo="lowes"] .demo-social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #6b7280;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #d1d5db;
+  text-decoration: none;
+}
+
+[data-demo="lowes"] .demo-social-icon:hover {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+/* Footer bottom */
+[data-demo="lowes"] .demo-footer-bottom {
+  border-top: 1px solid #3d3d5e;
+  padding: 16px 0;
+}
+
+[data-demo="lowes"] .demo-footer-bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.75rem;
+}
+
+/* ── Override dark-theme defaults from globals.css ─── */
 [data-demo="lowes"] .text-color-secondary {
   color: #6b7280 !important;
 }

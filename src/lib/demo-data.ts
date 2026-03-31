@@ -9,7 +9,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 1,
     name: "Cordless Drill/Driver Kit 20V",
     description:
-      "Powerful 20V MAX cordless drill/driver with lithium-ion battery. Includes charger and carrying bag. Two-speed transmission for versatile fastening and drilling.",
+      "Powerful 20V MAX cordless drill/driver with lithium-ion battery. Includes charger and carrying bag.",
     price: 89.99,
     category: "t-shirts",
     img: "https://images.unsplash.com/photo-1504148455328-c376907d081c?w=600&h=900&fit=crop",
@@ -34,7 +34,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 2,
     name: "Stainless Steel French Door Refrigerator",
     description:
-      "26 cu. ft. French door refrigerator with ice maker. Fingerprint-resistant stainless steel finish. Energy Star certified.",
+      "26 cu. ft. French door refrigerator with ice maker. Fingerprint-resistant stainless steel.",
     price: 1799.0,
     category: "t-shirts",
     img: "https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?w=600&h=900&fit=crop",
@@ -59,7 +59,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 3,
     name: "Premium Interior Paint - Eggshell",
     description:
-      "One-coat coverage interior paint with primer included. Low VOC formula. Washable and stain-resistant finish. Available in over 1,500 colors.",
+      "One-coat coverage interior paint with primer. Low VOC formula. Washable and stain-resistant.",
     price: 38.98,
     category: "t-shirts",
     img: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&h=900&fit=crop",
@@ -82,9 +82,9 @@ export const demoProducts: ProductWithVariants[] = [
   },
   {
     id: 4,
-    name: 'Riding Lawn Mower 42" Cut',
+    name: "Riding Lawn Mower 42in Cut",
     description:
-      '42-inch riding lawn mower with 18.5 HP engine. Automatic transmission, cruise control, and adjustable cutting height. Ideal for lawns up to 2 acres.',
+      "42-inch riding lawn mower with 18.5 HP engine. Automatic transmission, cruise control.",
     price: 1599.0,
     category: "pants",
     img: "https://images.unsplash.com/photo-1590212151175-e58edd96185b?w=600&h=900&fit=crop",
@@ -109,7 +109,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 5,
     name: "Brushed Nickel Bathroom Faucet",
     description:
-      "Single-handle bathroom faucet with WaterSense certified flow. Spot-resistant brushed nickel finish. Includes pop-up drain assembly.",
+      "Single-handle bathroom faucet with WaterSense certified flow. Spot-resistant brushed nickel.",
     price: 119.0,
     category: "sweatshirts",
     img: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=600&h=900&fit=crop",
@@ -134,7 +134,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 6,
     name: "LED Flush Mount Ceiling Light",
     description:
-      "13-inch LED flush mount ceiling light, 1400 lumens. Dimmable with warm white light. Energy Star certified. Easy installation.",
+      "13-inch LED flush mount ceiling light, 1400 lumens. Dimmable with warm white light.",
     price: 24.98,
     category: "sweatshirts",
     img: "https://images.unsplash.com/photo-1524484485831-a92ffc0de03f?w=600&h=900&fit=crop",
@@ -159,7 +159,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 7,
     name: "Composite Deck Boards - 16ft",
     description:
-      "Capped composite decking with natural wood grain texture. Resists fading, staining, and mold. 25-year limited warranty. Low maintenance.",
+      "Capped composite decking with natural wood grain texture. 25-year limited warranty.",
     price: 42.5,
     category: "pants",
     img: "https://images.unsplash.com/photo-1591825729269-caeb344f6df2?w=600&h=900&fit=crop",
@@ -184,7 +184,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 8,
     name: "Smart Thermostat with WiFi",
     description:
-      "Programmable smart thermostat with built-in WiFi. Compatible with most HVAC systems. Voice control via Alexa and Google Assistant. Saves up to 23% on energy costs.",
+      "Programmable smart thermostat with built-in WiFi. Voice control via Alexa and Google Assistant.",
     price: 129.99,
     category: "sweatshirts",
     img: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&h=900&fit=crop",
@@ -209,7 +209,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 9,
     name: "Pressure Washer 3100 PSI",
     description:
-      "Gas-powered pressure washer with 3100 PSI and 2.5 GPM. Includes 5 quick-connect nozzle tips. Ideal for decks, driveways, and siding.",
+      "Gas-powered pressure washer with 3100 PSI and 2.5 GPM. Includes 5 quick-connect nozzle tips.",
     price: 329.0,
     category: "t-shirts",
     img: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=600&h=900&fit=crop",
@@ -234,7 +234,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 10,
     name: "Vinyl Plank Flooring - 24 sq ft",
     description:
-      "Waterproof luxury vinyl plank flooring with realistic wood look. Click-lock installation, no glue needed. Scratch and dent resistant.",
+      "Waterproof luxury vinyl plank flooring with realistic wood look. Click-lock installation.",
     price: 52.98,
     category: "pants",
     img: "https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&h=900&fit=crop",
@@ -259,7 +259,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 11,
     name: "Garage Door Opener with Battery Backup",
     description:
-      "Belt-drive garage door opener with integrated battery backup. Ultra-quiet operation. Smartphone-enabled with built-in WiFi.",
+      "Belt-drive garage door opener with integrated battery backup. Ultra-quiet operation.",
     price: 248.0,
     category: "t-shirts",
     img: "https://images.unsplash.com/photo-1558036117-15d82a90b9b1?w=600&h=900&fit=crop",
@@ -284,7 +284,7 @@ export const demoProducts: ProductWithVariants[] = [
     id: 12,
     name: "Outdoor String Lights 48ft",
     description:
-      "Commercial-grade outdoor string lights with 15 shatterproof LED bulbs. Weatherproof and dimmable. Perfect for patios, decks, and backyards.",
+      "Commercial-grade outdoor string lights with 15 shatterproof LED bulbs. Weatherproof.",
     price: 34.99,
     category: "sweatshirts",
     img: "https://images.unsplash.com/photo-1558171813-4c088753af8f?w=600&h=900&fit=crop",
@@ -333,4 +333,174 @@ export const demoCategories = [
     image:
       "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800&h=400&fit=crop",
   },
+] as const;
+
+/** Lowes.com nav categories bar */
+export const demoNavCategories = [
+  { label: "Appliances", slug: "t-shirts" },
+  { label: "Bathroom", slug: "sweatshirts" },
+  { label: "Building Supplies", slug: "t-shirts" },
+  { label: "Doors & Windows", slug: "pants" },
+  { label: "Lawn & Garden", slug: "pants" },
+  { label: "Outdoor", slug: "pants" },
+  { label: "Flooring", slug: "sweatshirts" },
+  { label: "Tools", slug: "t-shirts" },
+  { label: "Plumbing", slug: "sweatshirts" },
+  { label: "Paint", slug: "t-shirts" },
+  { label: "Lighting", slug: "sweatshirts" },
+  { label: "Spring Trends", slug: "pants" },
+] as const;
+
+/** Recommended search pill suggestions */
+export const demoSearchSuggestions = [
+  "Electric Range",
+  "Washing Machine",
+  "Bathroom Vanity",
+  "Air Compressor",
+  "Tool Box",
+  "Electric Fireplace",
+  "Space Heater",
+  "Fire Pit",
+  "Garage Door Opener",
+  "Storm Door",
+  "Vinyl Plank Flooring",
+  "Ceiling Fan With Light",
+] as const;
+
+/** Deal cards for horizontal strip */
+export const demoDealCards = [
+  {
+    title: "Select Mulch",
+    price: "$2",
+    unit: "per bag",
+    image:
+      "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
+    link: "/pants",
+  },
+  {
+    title: "Garden Soil",
+    price: "$5",
+    unit: "per bag",
+    image:
+      "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=300&fit=crop",
+    link: "/pants",
+  },
+  {
+    title: "Grass Seed",
+    price: "Save up to $20",
+    unit: "",
+    image:
+      "https://images.unsplash.com/photo-1558906455-dba6c86b0b2c?w=400&h=300&fit=crop",
+    link: "/pants",
+  },
+  {
+    title: "Grills & Accessories",
+    price: "Up to 30% off",
+    unit: "",
+    image:
+      "https://images.unsplash.com/photo-1529599584916-82a3db1dfc78?w=400&h=300&fit=crop",
+    link: "/t-shirts",
+  },
+  {
+    title: "Outdoor Power",
+    price: "Up to 25% off",
+    unit: "",
+    image:
+      "https://images.unsplash.com/photo-1590212151175-e58edd96185b?w=400&h=300&fit=crop",
+    link: "/pants",
+  },
+  {
+    title: "Patio Furniture",
+    price: "Up to 40% off",
+    unit: "",
+    image:
+      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=400&h=300&fit=crop",
+    link: "/pants",
+  },
+] as const;
+
+/** Lifestyle content sections matching lowes.com 2-card rows */
+export const demoLifestyleSections = [
+  {
+    heading: "Celebrate Spring With Style",
+    cards: [
+      {
+        title: "Easter Decor",
+        description:
+          "Find festive florals, pastels and more to brighten your home.",
+        image:
+          "https://images.unsplash.com/photo-1457530378978-8bac673b8062?w=400&h=300&fit=crop",
+        link: "/sweatshirts",
+      },
+      {
+        title: "Hosting Made Easy",
+        description: "Refresh your space and get ready to gather.",
+        image:
+          "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop",
+        link: "/t-shirts",
+      },
+    ],
+  },
+  {
+    heading: "Refresh Your Landscape",
+    cards: [
+      {
+        title: "Lawn Essentials",
+        description: "Browse products to tackle your to-do list.",
+        image:
+          "https://images.unsplash.com/photo-1558906455-dba6c86b0b2c?w=400&h=300&fit=crop",
+        link: "/pants",
+      },
+      {
+        title: "Bountiful Blooms",
+        description: "Plant a garden you will enjoy throughout spring.",
+        image:
+          "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=300&fit=crop",
+        link: "/pants",
+      },
+    ],
+  },
+  {
+    heading: "Explore Favorites",
+    cards: [
+      {
+        title: "Spring Top Sellers",
+        description: "Find must-have lawn mowers and more.",
+        image:
+          "https://images.unsplash.com/photo-1590212151175-e58edd96185b?w=400&h=300&fit=crop",
+        link: "/pants",
+      },
+      {
+        title: "DIY Project Picks",
+        description:
+          "Check out essentials to make the most of the season.",
+        image:
+          "https://images.unsplash.com/photo-1581783898377-1c85bf937427?w=400&h=300&fit=crop",
+        link: "/t-shirts",
+      },
+    ],
+  },
+] as const;
+
+/** Popular categories grid */
+export const demoPopularCategories = [
+  { label: "Appliances", slug: "t-shirts" },
+  { label: "Bathroom", slug: "sweatshirts" },
+  { label: "Building Supplies", slug: "t-shirts" },
+  { label: "Cleaning Supplies", slug: "t-shirts" },
+  { label: "Doors & Windows", slug: "pants" },
+  { label: "Electrical", slug: "sweatshirts" },
+  { label: "Flooring", slug: "sweatshirts" },
+  { label: "Hardware", slug: "t-shirts" },
+  { label: "Heating & Cooling", slug: "sweatshirts" },
+  { label: "Home Decor", slug: "sweatshirts" },
+  { label: "Kitchen", slug: "t-shirts" },
+  { label: "Lawn & Garden", slug: "pants" },
+  { label: "Lighting & Ceiling Fans", slug: "sweatshirts" },
+  { label: "Outdoors", slug: "pants" },
+  { label: "Paint", slug: "t-shirts" },
+  { label: "Plumbing", slug: "sweatshirts" },
+  { label: "Smart Home", slug: "sweatshirts" },
+  { label: "Storage & Organization", slug: "t-shirts" },
+  { label: "Tools", slug: "t-shirts" },
 ] as const;
