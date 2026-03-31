@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { demoCategories } from "@/lib/demo-data";
 
@@ -12,20 +13,14 @@ export const DemoNavbar = () => {
       {/* Main navbar */}
       <header className="pointer-events-auto w-full px-4 sm:px-8 lg:px-12 py-4 flex items-center justify-between gap-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 shrink-0">
-          <svg
-            width="36"
-            height="36"
-            viewBox="0 0 36 36"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <rect width="36" height="36" rx="4" fill="#ffffff" />
-            <path d="M8 10h4v16H8V10zm6 0h4l6 10v-10h4v16h-4l-6-10v10h-4V10z" fill="#003da5" />
-          </svg>
-          <span className="text-xl font-bold tracking-tight hidden sm:inline">
-            Lowe&apos;s
-          </span>
+        <Link href="/" className="flex items-center shrink-0">
+          <Image
+            src="/lowes-logo.png"
+            alt="Lowe's"
+            width={120}
+            height={55}
+            priority
+          />
         </Link>
 
         {/* Category links */}
