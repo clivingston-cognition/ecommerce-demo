@@ -390,7 +390,7 @@ export const demoDealCards = [
     price: "Save up to $20",
     unit: "",
     image:
-      "https://images.unsplash.com/photo-1558906455-dba6c86b0b2c?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=400&h=300&fit=crop",
     link: "/pants",
   },
   {
@@ -398,7 +398,7 @@ export const demoDealCards = [
     price: "Up to 30% off",
     unit: "",
     image:
-      "https://images.unsplash.com/photo-1529599584916-82a3db1dfc78?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&h=300&fit=crop",
     link: "/t-shirts",
   },
   {
@@ -448,7 +448,7 @@ export const demoLifestyleSections = [
         title: "Lawn Essentials",
         description: "Browse products to tackle your to-do list.",
         image:
-          "https://images.unsplash.com/photo-1558906455-dba6c86b0b2c?w=400&h=300&fit=crop",
+          "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=400&h=300&fit=crop",
         link: "/pants",
       },
       {

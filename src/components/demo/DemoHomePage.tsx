@@ -215,7 +215,7 @@ export const DemoHomePage = () => {
               { title: "How to Build a Deck", image: "https://images.unsplash.com/photo-1591825729269-caeb344f6df2?w=400&h=300&fit=crop" },
               { title: "Bathroom Remodel Ideas", image: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=400&h=300&fit=crop" },
               { title: "Paint Color Inspiration", image: "https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=400&h=300&fit=crop" },
-              { title: "Spring Lawn Care Tips", image: "https://images.unsplash.com/photo-1558906455-dba6c86b0b2c?w=400&h=300&fit=crop" },
+              { title: "Spring Lawn Care Tips", image: "https://images.unsplash.com/photo-1592150621744-aca64f48394a?w=400&h=300&fit=crop" },
               { title: "Smart Home Setup Guide", image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop" },
               { title: "Kitchen Renovation 101", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop" },
             ].map((project) => (
