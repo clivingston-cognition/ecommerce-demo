@@ -187,7 +187,7 @@ export const demoProducts: ProductWithVariants[] = [
       "Programmable smart thermostat with built-in WiFi. Compatible with most HVAC systems. Voice control via Alexa and Google Assistant. Saves up to 23% on energy costs.",
     price: 129.99,
     category: "sweatshirts",
-    img: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=900&fit=crop",
+    img: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&h=900&fit=crop",
     createdAt: "2025-04-15T00:00:00Z",
     updatedAt: "2025-04-15T00:00:00Z",
     variants: [
@@ -198,7 +198,7 @@ export const demoProducts: ProductWithVariants[] = [
         color: "white",
         sizes: ["S"],
         images: [
-          "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=900&fit=crop",
+          "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&h=900&fit=crop",
         ],
         createdAt: "2025-04-15T00:00:00Z",
         updatedAt: "2025-04-15T00:00:00Z",
@@ -331,6 +331,6 @@ export const demoCategories = [
     description: "Indoor/outdoor lighting, smart home, and electrical",
     icon: "lightbulb",
     image:
-      "https://images.unsplash.com/photo-1565814329452-e1432341cea1?w=800&h=400&fit=crop",
+      "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=800&h=400&fit=crop",
   },
 ] as const;
