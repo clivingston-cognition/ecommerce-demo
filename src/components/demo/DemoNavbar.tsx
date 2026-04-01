@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { demoNavCategories } from "@/lib/demo-data";
@@ -8,17 +7,17 @@ export const DemoNavbar = () => {
     <>
       {/* Row 1: Top promo bar */}
       <div className="demo-promo-bar">
-        <Link legacyBehavior href="/pants"><a className="demo-promo-bar-link">
+        <Link href="/pants" className="demo-promo-bar-link">
           SpringFest is here &mdash; find fresh deals for your home and
           landscape. <span className="font-bold">Shop Now &gt;</span>
-        </a></Link>
+        </Link>
       </div>
 
       {/* Row 2: Main header */}
       <header className="demo-header-main pointer-events-auto">
         <div className="demo-header-inner">
           {/* Logo */}
-          <Link legacyBehavior href="/"><a className="flex items-center shrink-0">
+          <Link href="/" className="flex items-center shrink-0">
             <Image
               src="/lowes-logo.png"
               alt="Lowe's Home Improvement"
@@ -26,7 +25,7 @@ export const DemoNavbar = () => {
               height={55}
               priority
             />
-          </a></Link>
+          </Link>
 
           {/* Store selector */}
           <div className="demo-store-selector hidden md:flex items-center gap-1 shrink-0">
@@ -88,14 +87,14 @@ export const DemoNavbar = () => {
               </svg>
               <span className="text-[10px]">Sign In</span>
             </button>
-            <Link legacyBehavior href="#"><a className="demo-nav-icon flex flex-col items-center gap-0.5 relative">
+            <Link href="#" className="demo-nav-icon flex flex-col items-center gap-0.5 relative">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="9" cy="21" r="1" />
                 <circle cx="20" cy="21" r="1" />
                 <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
               </svg>
               <span className="text-[10px]">Cart</span>
-            </a></Link>
+            </Link>
           </nav>
         </div>
       </header>
@@ -103,28 +102,28 @@ export const DemoNavbar = () => {
       {/* Row 3: Category navigation */}
       <nav className="demo-category-nav pointer-events-auto" aria-label="Category navigation">
         <div className="demo-category-nav-inner">
-          <Link legacyBehavior href="/"><a className="demo-cat-link demo-cat-link-special">
+          <Link href="/" className="demo-cat-link demo-cat-link-special">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="3" y1="12" x2="21" y2="12" />
               <line x1="3" y1="6" x2="21" y2="6" />
               <line x1="3" y1="18" x2="21" y2="18" />
             </svg>
             Shop All
-          </a></Link>
-          <Link legacyBehavior href="#"><a className="demo-cat-link demo-cat-link-special">
+          </Link>
+          <Link href="#" className="demo-cat-link demo-cat-link-special">
             Installations
-          </a></Link>
-          <Link legacyBehavior href="#"><a className="demo-cat-link demo-cat-link-special">
+          </Link>
+          <Link href="#" className="demo-cat-link demo-cat-link-special">
             Deals
-          </a></Link>
-          <Link legacyBehavior href="#"><a className="demo-cat-link demo-cat-link-special">
+          </Link>
+          <Link href="#" className="demo-cat-link demo-cat-link-special">
             Design &amp; Ideas
-          </a></Link>
+          </Link>
           <span className="demo-cat-divider" />
           {demoNavCategories.map((cat) => (
-            <Link legacyBehavior key={cat.label} href={`/${cat.slug}`}><a className="demo-cat-link">
+            <Link key={cat.label} href={`/${cat.slug}`} className="demo-cat-link">
               {cat.label}
-            </a></Link>
+            </Link>
           ))}
         </div>
       </nav>
