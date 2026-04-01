@@ -86,7 +86,7 @@ export const DemoFooter = () => {
             <div className="flex gap-3 mt-2">
               {["Facebook", "Twitter", "Pinterest", "Instagram", "YouTube"].map(
                 (s) => (
-                  <Link key={s} href="#"><a className="demo-social-icon" title={s}>
+                  <Link legacyBehavior key={s} href="#"><a className="demo-social-icon" title={s}>
                     {s[0]}
                   </a></Link>
                 ),
