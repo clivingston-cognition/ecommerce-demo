@@ -1,6 +1,6 @@
 "use server";
 
-import { cacheLife, cacheTag, updateTag } from "next/cache";
+import { revalidateTag, unstable_cache } from "next/cache";
 import { productsRepository } from "@/lib/db/drizzle/repositories";
 import {
   type ProductCategory,
@@ -12,20 +12,20 @@ import {
  * Fetch all products with caching
  * Cache is tagged for invalidation and set to revalidate every hour
  */
-export async function getAllProducts(): Promise<ProductWithVariants[]> {
-  "use cache";
-  cacheTag("products");
-  cacheLife("hours");
-
-  try {
-    const products = await productsRepository.findAll();
-    const validatedProducts = productWithVariantsSchema.array().parse(products);
-    return validatedProducts.sort((a, b) => a.name.localeCompare(b.name));
-  } catch (error) {
-    console.error("Error fetching products:", error);
-    return [];
-  }
-}
+export const getAllProducts = unstable_cache(
+  async (): Promise<ProductWithVariants[]> => {
+    try {
+      const products = await productsRepository.findAll();
+      const validatedProducts = productWithVariantsSchema.array().parse(products);
+      return validatedProducts.sort((a, b) => a.name.localeCompare(b.name));
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      return [];
+    }
+  },
+  ["products"],
+  { revalidate: 3600, tags: ["products"] },
+);
 
 /**
  * Fetch products by category with caching
@@ -34,18 +34,21 @@ export async function getAllProducts(): Promise<ProductWithVariants[]> {
 export async function getCategoryProducts(
   category: ProductCategory,
 ): Promise<ProductWithVariants[]> {
-  "use cache";
-  cacheTag("products", `category-${category}`);
-  cacheLife("hours");
-
-  try {
-    const products = await productsRepository.findByCategory(category);
-    const validatedProducts = productWithVariantsSchema.array().parse(products);
-    return validatedProducts.sort((a, b) => a.name.localeCompare(b.name));
-  } catch (error) {
-    console.error("Error fetching category products:", error);
-    return [];
-  }
+  const cached = unstable_cache(
+    async () => {
+      try {
+        const products = await productsRepository.findByCategory(category);
+        const validatedProducts = productWithVariantsSchema.array().parse(products);
+        return validatedProducts.sort((a, b) => a.name.localeCompare(b.name));
+      } catch (error) {
+        console.error("Error fetching category products:", error);
+        return [];
+      }
+    },
+    ["products", `category-${category}`],
+    { revalidate: 3600, tags: ["products", `category-${category}`] },
+  );
+  return cached();
 }
 
 /**
@@ -55,18 +58,21 @@ export async function getCategoryProducts(
 export async function getProduct(
   productId: number,
 ): Promise<ProductWithVariants | null> {
-  "use cache";
-  cacheTag("products", `product-${productId}`);
-  cacheLife("hours");
-
-  try {
-    const product = await productsRepository.findById(productId);
-    if (!product) return null;
-    return productWithVariantsSchema.parse(product);
-  } catch (error) {
-    console.error("Error fetching product:", error);
-    return null;
-  }
+  const cached = unstable_cache(
+    async () => {
+      try {
+        const product = await productsRepository.findById(productId);
+        if (!product) return null;
+        return productWithVariantsSchema.parse(product);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+        return null;
+      }
+    },
+    ["products", `product-${productId}`],
+    { revalidate: 3600, tags: ["products", `product-${productId}`] },
+  );
+  return cached();
 }
 
 /**
@@ -91,14 +97,13 @@ export async function getRandomProducts(
 /**
  * Invalidates all product caches immediately
  * Call this after creating, updating, or deleting products
- * Uses updateTag for read-your-own-writes semantics (user sees changes immediately)
  */
 export async function revalidateProducts(productId?: number): Promise<void> {
   // Always invalidate the general products tag
-  updateTag("products");
+  revalidateTag("products");
 
   // If a specific product ID is provided, also invalidate that specific product
   if (productId) {
-    updateTag(`product-${productId}`);
+    revalidateTag(`product-${productId}`);
   }
 }
