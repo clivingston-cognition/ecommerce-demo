@@ -6,8 +6,14 @@ import {
   GridProducts,
   ProductItem,
 } from "@/components/products";
+import { isDemoMode } from "@/lib/demo";
+import { DemoHomePage } from "@/components/demo/DemoHomePage";
 
 const Home = async () => {
+  if (isDemoMode) {
+    return <DemoHomePage />;
+  }
+
   return (
     <section className="pt-14">
       <ErrorBoundary fallback={<ErrorComponent />}>

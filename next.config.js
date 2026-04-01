@@ -1,34 +1,8 @@
-const getSupabaseHostname = () => {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  if (!url) return null;
-  try {
-    return new URL(url).hostname;
-  } catch {
-    return null;
-  }
-};
-
-const supabaseHostname = getSupabaseHostname();
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  cacheComponents: true,
+  reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "images.unsplash.com",
-      },
-      // Only include Supabase pattern if URL is configured
-      ...(supabaseHostname
-        ? [
-            {
-              protocol: "https",
-              hostname: supabaseHostname,
-              pathname: "/storage/v1/object/public/**",
-            },
-          ]
-        : []),
-    ],
+    domains: ["images.unsplash.com"],
   },
 };
 
