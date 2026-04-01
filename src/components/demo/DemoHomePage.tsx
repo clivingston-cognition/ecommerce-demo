@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -42,14 +41,13 @@ function CarouselProductCard({
   const productLink = `/${product.category}/${product.id}?variant=${product.variants[0].color}`;
 
   return (
-    <Link legacyBehavior href={productLink}>
-      <a className="demo-carousel-card">
+    <Link href={productLink} className="demo-carousel-card">
       <div className="relative aspect-square overflow-hidden">
         <Image
           src={product.img}
           alt={product.name}
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
         />
         {product.price > 200 && (
           <span className="absolute top-2 left-2 demo-badge">Top Seller</span>
@@ -75,7 +73,7 @@ function CarouselProductCard({
           </div>
         )}
       </div>
-    </a></Link>
+    </Link>
   );
 }
 
@@ -88,9 +86,9 @@ export const DemoHomePage = () => {
           <span className="demo-search-pills-label">Recommended Searches</span>
           <div className="demo-search-pills">
             {demoSearchSuggestions.map((term) => (
-              <Link legacyBehavior key={term} href="#"><a className="demo-pill">
+              <Link key={term} href="#" className="demo-pill">
                 {term}
-              </a></Link>
+              </Link>
             ))}
           </div>
         </div>
@@ -101,13 +99,13 @@ export const DemoHomePage = () => {
         <div className="demo-section-inner">
           <div className="demo-deals-grid">
             {demoDealCards.map((deal) => (
-              <Link legacyBehavior key={deal.title} href={deal.link}><a className="demo-deal-card">
+              <Link key={deal.title} href={deal.link} className="demo-deal-card">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={deal.image}
                     alt={deal.title}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                   />
                 </div>
                 <div className="demo-deal-card-body">
@@ -117,7 +115,7 @@ export const DemoHomePage = () => {
                     <p className="text-xs text-gray-500">{deal.unit}</p>
                   )}
                 </div>
-              </a></Link>
+              </Link>
             ))}
           </div>
         </div>
@@ -156,13 +154,13 @@ export const DemoHomePage = () => {
             <h2 className="demo-section-heading">{section.heading}</h2>
             <div className="demo-lifestyle-grid">
               {section.cards.map((card) => (
-                <Link legacyBehavior key={card.title} href={card.link}><a className="demo-lifestyle-card group">
+                <Link key={card.title} href={card.link} className="demo-lifestyle-card group">
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
                       src={card.image}
                       alt={card.title}
-                      layout="fill"
-                      objectFit="cover"
+                      fill
+                      style={{ objectFit: "cover" }}
                     />
                   </div>
                   <div className="demo-lifestyle-card-body">
@@ -172,7 +170,7 @@ export const DemoHomePage = () => {
                       Shop Now &gt;
                     </span>
                   </div>
-                </a></Link>
+                </Link>
               ))}
             </div>
           </div>
@@ -185,7 +183,7 @@ export const DemoHomePage = () => {
           <h2 className="demo-section-heading">Popular Categories</h2>
           <div className="demo-popular-grid">
             {demoPopularCategories.map((cat) => (
-              <Link legacyBehavior key={cat.label} href={`/${cat.slug}`}><a className="demo-popular-item">
+              <Link key={cat.label} href={`/${cat.slug}`} className="demo-popular-item">
                 <div className="demo-popular-icon">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <rect x="3" y="3" width="7" height="7" />
@@ -197,7 +195,7 @@ export const DemoHomePage = () => {
                 <span className="text-xs text-center font-medium leading-tight">
                   {cat.label}
                 </span>
-              </a></Link>
+              </Link>
             ))}
           </div>
         </div>
@@ -218,17 +216,17 @@ export const DemoHomePage = () => {
               { title: "Smart Home Setup Guide", image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop" },
               { title: "Kitchen Renovation 101", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop" },
             ].map((project) => (
-              <Link legacyBehavior key={project.title} href="#"><a className="demo-project-card group">
+              <Link key={project.title} href="#" className="demo-project-card group">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                   <Image
                     src={project.image}
                     alt={project.title}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    style={{ objectFit: "cover" }}
                   />
                 </div>
                 <h3 className="text-sm font-medium mt-2">{project.title}</h3>
-              </a></Link>
+              </Link>
             ))}
           </div>
         </div>
