@@ -1,3 +1,4 @@
+import React from "react";
 import Link from "next/link";
 
 export const DemoFooter = () => {
@@ -39,44 +40,44 @@ export const DemoFooter = () => {
           <div>
             <h2 className="demo-footer-heading">Who We Are</h2>
             <ul>
-              <li className={li}><Link href="#" className={lk}>About Lowe&apos;s</Link></li>
-              <li className={li}><Link href="#" className={lk}>Careers</Link></li>
-              <li className={li}><Link href="#" className={lk}>Corporate Responsibility</Link></li>
-              <li className={li}><Link href="#" className={lk}>Newsroom</Link></li>
-              <li className={li}><Link href="#" className={lk}>Investors</Link></li>
+              <li className={li}><Link href="#"><a className={lk}>About Lowe&apos;s</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Careers</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Corporate Responsibility</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Newsroom</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Investors</a></Link></li>
             </ul>
           </div>
 
           <div>
             <h2 className="demo-footer-heading">Customer Service</h2>
             <ul>
-              <li className={li}><Link href="#" className={lk}>Contact Us</Link></li>
-              <li className={li}><Link href="#" className={lk}>FAQ</Link></li>
-              <li className={li}><Link href="#" className={lk}>Order Status</Link></li>
-              <li className={li}><Link href="#" className={lk}>Shipping &amp; Delivery</Link></li>
-              <li className={li}><Link href="#" className={lk}>Returns &amp; Exchanges</Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Contact Us</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>FAQ</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Order Status</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Shipping &amp; Delivery</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Returns &amp; Exchanges</a></Link></li>
             </ul>
           </div>
 
           <div>
             <h2 className="demo-footer-heading">Services</h2>
             <ul>
-              <li className={li}><Link href="#" className={lk}>Installation Services</Link></li>
-              <li className={li}><Link href="#" className={lk}>Store Locator</Link></li>
-              <li className={li}><Link href="#" className={lk}>Lowe&apos;s Pro</Link></li>
-              <li className={li}><Link href="#" className={lk}>Lowe&apos;s Rental</Link></li>
-              <li className={li}><Link href="#" className={lk}>Gift Cards</Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Installation Services</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Store Locator</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Lowe&apos;s Pro</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Lowe&apos;s Rental</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Gift Cards</a></Link></li>
             </ul>
           </div>
 
           <div>
             <h2 className="demo-footer-heading">Resources</h2>
             <ul>
-              <li className={li}><Link href="#" className={lk}>Design &amp; Ideas</Link></li>
-              <li className={li}><Link href="#" className={lk}>DIY Projects</Link></li>
-              <li className={li}><Link href="#" className={lk}>Rebates</Link></li>
-              <li className={li}><Link href="#" className={lk}>Credit Cards</Link></li>
-              <li className={li}><Link href="#" className={lk}>Subscriptions</Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Design &amp; Ideas</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>DIY Projects</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Rebates</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Credit Cards</a></Link></li>
+              <li className={li}><Link href="#"><a className={lk}>Subscriptions</a></Link></li>
             </ul>
           </div>
 
@@ -85,9 +86,9 @@ export const DemoFooter = () => {
             <div className="flex gap-3 mt-2">
               {["Facebook", "Twitter", "Pinterest", "Instagram", "YouTube"].map(
                 (s) => (
-                  <Link key={s} href="#" className="demo-social-icon" title={s}>
+                  <Link key={s} href="#"><a className="demo-social-icon" title={s}>
                     {s[0]}
-                  </Link>
+                  </a></Link>
                 ),
               )}
             </div>
@@ -100,10 +101,10 @@ export const DemoFooter = () => {
         <div className="demo-footer-inner demo-footer-bottom-inner">
           <p>&copy; 2026 Lowe&apos;s. All rights reserved. This is a demo site.</p>
           <div className="flex gap-4 flex-wrap">
-            <Link href="#" className="hover:text-white">Terms</Link>
-            <Link href="#" className="hover:text-white">Privacy</Link>
-            <Link href="#" className="hover:text-white">CA Notice</Link>
-            <Link href="#" className="hover:text-white">AdChoices</Link>
+            <Link href="#"><a className="hover:text-white">Terms</a></Link>
+            <Link href="#"><a className="hover:text-white">Privacy</a></Link>
+            <Link href="#"><a className="hover:text-white">CA Notice</a></Link>
+            <Link href="#"><a className="hover:text-white">AdChoices</a></Link>
           </div>
         </div>
       </div>

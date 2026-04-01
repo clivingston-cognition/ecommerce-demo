@@ -2,9 +2,32 @@
  * Mock product data for demo mode (DEMO=1).
  * Lowes-style home improvement products with real Unsplash images.
  */
-import type { ProductWithVariants } from "@/lib/db/drizzle/schema";
 
-export const demoProducts: ProductWithVariants[] = [
+/** Inline type to avoid pulling in drizzle/zod DB schema dependencies */
+interface DemoProductVariant {
+  id: number;
+  productId: number;
+  stripeId: string;
+  color: string;
+  sizes: string[];
+  images: string[];
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface DemoProduct {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  img: string;
+  createdAt: string;
+  updatedAt: string;
+  variants: DemoProductVariant[];
+}
+
+export const demoProducts: DemoProduct[] = [
   {
     id: 1,
     name: "Cordless Drill/Driver Kit 20V",
