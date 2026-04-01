@@ -45,7 +45,7 @@ function formatJsonLog(entry: StripeLogEntry): string {
   });
 }
 
-function isStructuredLogging(): boolean {
+function useStructuredLogging(): boolean {
   return process.env.NODE_ENV === "production" || process.env.STRIPE_JSON_LOGS === "true";
 }
 
@@ -58,7 +58,7 @@ export const stripeLogger = {
       ...details,
     };
 
-    console.log(isStructuredLogging() ? formatJsonLog(entry) : formatConsoleLog(entry));
+    console.log(useStructuredLogging() ? formatJsonLog(entry) : formatConsoleLog(entry));
   },
 
   warn(message: string, details?: Partial<StripeLogEntry>) {
@@ -69,7 +69,7 @@ export const stripeLogger = {
       ...details,
     };
 
-    console.warn(isStructuredLogging() ? formatJsonLog(entry) : formatConsoleLog(entry));
+    console.warn(useStructuredLogging() ? formatJsonLog(entry) : formatConsoleLog(entry));
   },
 
   error(message: string, error?: unknown, details?: Partial<StripeLogEntry>) {
@@ -84,7 +84,7 @@ export const stripeLogger = {
       ...details,
     };
 
-    if (isStructuredLogging()) {
+    if (useStructuredLogging()) {
       console.error(formatJsonLog(entry));
     } else {
       console.error(formatConsoleLog(entry));
