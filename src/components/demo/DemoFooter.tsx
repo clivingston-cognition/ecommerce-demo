@@ -40,44 +40,44 @@ export const DemoFooter = () => {
           <div>
             <h2 className="demo-footer-heading">Who We Are</h2>
             <ul>
-              <li className={li}><Link href="#"><a className={lk}>About Lowe&apos;s</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Careers</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Corporate Responsibility</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Newsroom</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Investors</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>About Lowe&apos;s</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Careers</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Corporate Responsibility</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Newsroom</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Investors</a></Link></li>
             </ul>
           </div>
 
           <div>
             <h2 className="demo-footer-heading">Customer Service</h2>
             <ul>
-              <li className={li}><Link href="#"><a className={lk}>Contact Us</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>FAQ</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Order Status</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Shipping &amp; Delivery</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Returns &amp; Exchanges</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Contact Us</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>FAQ</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Order Status</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Shipping &amp; Delivery</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Returns &amp; Exchanges</a></Link></li>
             </ul>
           </div>
 
           <div>
             <h2 className="demo-footer-heading">Services</h2>
             <ul>
-              <li className={li}><Link href="#"><a className={lk}>Installation Services</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Store Locator</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Lowe&apos;s Pro</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Lowe&apos;s Rental</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Gift Cards</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Installation Services</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Store Locator</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Lowe&apos;s Pro</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Lowe&apos;s Rental</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Gift Cards</a></Link></li>
             </ul>
           </div>
 
           <div>
             <h2 className="demo-footer-heading">Resources</h2>
             <ul>
-              <li className={li}><Link href="#"><a className={lk}>Design &amp; Ideas</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>DIY Projects</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Rebates</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Credit Cards</a></Link></li>
-              <li className={li}><Link href="#"><a className={lk}>Subscriptions</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Design &amp; Ideas</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>DIY Projects</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Rebates</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Credit Cards</a></Link></li>
+              <li className={li}><Link legacyBehavior href="#"><a className={lk}>Subscriptions</a></Link></li>
             </ul>
           </div>
 
@@ -101,10 +101,10 @@ export const DemoFooter = () => {
         <div className="demo-footer-inner demo-footer-bottom-inner">
           <p>&copy; 2026 Lowe&apos;s. All rights reserved. This is a demo site.</p>
           <div className="flex gap-4 flex-wrap">
-            <Link href="#"><a className="hover:text-white">Terms</a></Link>
-            <Link href="#"><a className="hover:text-white">Privacy</a></Link>
-            <Link href="#"><a className="hover:text-white">CA Notice</a></Link>
-            <Link href="#"><a className="hover:text-white">AdChoices</a></Link>
+            <Link legacyBehavior href="#"><a className="hover:text-white">Terms</a></Link>
+            <Link legacyBehavior href="#"><a className="hover:text-white">Privacy</a></Link>
+            <Link legacyBehavior href="#"><a className="hover:text-white">CA Notice</a></Link>
+            <Link legacyBehavior href="#"><a className="hover:text-white">AdChoices</a></Link>
           </div>
         </div>
       </div>

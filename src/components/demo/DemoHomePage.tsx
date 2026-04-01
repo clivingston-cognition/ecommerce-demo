@@ -42,7 +42,7 @@ function CarouselProductCard({
   const productLink = `/${product.category}/${product.id}?variant=${product.variants[0].color}`;
 
   return (
-    <Link href={productLink}>
+    <Link legacyBehavior href={productLink}>
       <a className="demo-carousel-card">
       <div className="relative aspect-square overflow-hidden">
         <Image
@@ -88,7 +88,7 @@ export const DemoHomePage = () => {
           <span className="demo-search-pills-label">Recommended Searches</span>
           <div className="demo-search-pills">
             {demoSearchSuggestions.map((term) => (
-              <Link key={term} href="#"><a className="demo-pill">
+              <Link legacyBehavior key={term} href="#"><a className="demo-pill">
                 {term}
               </a></Link>
             ))}
@@ -101,7 +101,7 @@ export const DemoHomePage = () => {
         <div className="demo-section-inner">
           <div className="demo-deals-grid">
             {demoDealCards.map((deal) => (
-              <Link key={deal.title} href={deal.link}><a className="demo-deal-card">
+              <Link legacyBehavior key={deal.title} href={deal.link}><a className="demo-deal-card">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image
                     src={deal.image}
@@ -156,7 +156,7 @@ export const DemoHomePage = () => {
             <h2 className="demo-section-heading">{section.heading}</h2>
             <div className="demo-lifestyle-grid">
               {section.cards.map((card) => (
-                <Link key={card.title} href={card.link}><a className="demo-lifestyle-card group">
+                <Link legacyBehavior key={card.title} href={card.link}><a className="demo-lifestyle-card group">
                   <div className="relative aspect-[16/9] overflow-hidden">
                     <Image
                       src={card.image}
@@ -185,7 +185,7 @@ export const DemoHomePage = () => {
           <h2 className="demo-section-heading">Popular Categories</h2>
           <div className="demo-popular-grid">
             {demoPopularCategories.map((cat) => (
-              <Link key={cat.label} href={`/${cat.slug}`}><a className="demo-popular-item">
+              <Link legacyBehavior key={cat.label} href={`/${cat.slug}`}><a className="demo-popular-item">
                 <div className="demo-popular-icon">
                   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <rect x="3" y="3" width="7" height="7" />
@@ -218,7 +218,7 @@ export const DemoHomePage = () => {
               { title: "Smart Home Setup Guide", image: "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=400&h=300&fit=crop" },
               { title: "Kitchen Renovation 101", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop" },
             ].map((project) => (
-              <Link key={project.title} href="#"><a className="demo-project-card group">
+              <Link legacyBehavior key={project.title} href="#"><a className="demo-project-card group">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                   <Image
                     src={project.image}

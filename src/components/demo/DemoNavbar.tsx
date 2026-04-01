@@ -8,7 +8,7 @@ export const DemoNavbar = () => {
     <>
       {/* Row 1: Top promo bar */}
       <div className="demo-promo-bar">
-        <Link href="/pants"><a className="demo-promo-bar-link">
+        <Link legacyBehavior href="/pants"><a className="demo-promo-bar-link">
           SpringFest is here &mdash; find fresh deals for your home and
           landscape. <span className="font-bold">Shop Now &gt;</span>
         </a></Link>
@@ -18,7 +18,7 @@ export const DemoNavbar = () => {
       <header className="demo-header-main pointer-events-auto">
         <div className="demo-header-inner">
           {/* Logo */}
-          <Link href="/"><a className="flex items-center shrink-0">
+          <Link legacyBehavior href="/"><a className="flex items-center shrink-0">
             <Image
               src="/lowes-logo.png"
               alt="Lowe's Home Improvement"
@@ -88,7 +88,7 @@ export const DemoNavbar = () => {
               </svg>
               <span className="text-[10px]">Sign In</span>
             </button>
-            <Link href="#"><a className="demo-nav-icon flex flex-col items-center gap-0.5 relative">
+            <Link legacyBehavior href="#"><a className="demo-nav-icon flex flex-col items-center gap-0.5 relative">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="9" cy="21" r="1" />
                 <circle cx="20" cy="21" r="1" />
@@ -103,7 +103,7 @@ export const DemoNavbar = () => {
       {/* Row 3: Category navigation */}
       <nav className="demo-category-nav pointer-events-auto" aria-label="Category navigation">
         <div className="demo-category-nav-inner">
-          <Link href="/"><a className="demo-cat-link demo-cat-link-special">
+          <Link legacyBehavior href="/"><a className="demo-cat-link demo-cat-link-special">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <line x1="3" y1="12" x2="21" y2="12" />
               <line x1="3" y1="6" x2="21" y2="6" />
@@ -111,18 +111,18 @@ export const DemoNavbar = () => {
             </svg>
             Shop All
           </a></Link>
-          <Link href="#"><a className="demo-cat-link demo-cat-link-special">
+          <Link legacyBehavior href="#"><a className="demo-cat-link demo-cat-link-special">
             Installations
           </a></Link>
-          <Link href="#"><a className="demo-cat-link demo-cat-link-special">
+          <Link legacyBehavior href="#"><a className="demo-cat-link demo-cat-link-special">
             Deals
           </a></Link>
-          <Link href="#"><a className="demo-cat-link demo-cat-link-special">
+          <Link legacyBehavior href="#"><a className="demo-cat-link demo-cat-link-special">
             Design &amp; Ideas
           </a></Link>
           <span className="demo-cat-divider" />
           {demoNavCategories.map((cat) => (
-            <Link key={cat.label} href={`/${cat.slug}`}><a className="demo-cat-link">
+            <Link legacyBehavior key={cat.label} href={`/${cat.slug}`}><a className="demo-cat-link">
               {cat.label}
             </a></Link>
           ))}
