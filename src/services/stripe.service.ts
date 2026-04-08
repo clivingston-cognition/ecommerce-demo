@@ -2,6 +2,7 @@ import { stripe, Stripe } from "@/lib/stripe";
 import {
   cartRepository,
   ordersRepository,
+  abandonedCartEmailsRepository,
 } from "@/lib/db/drizzle/repositories";
 import { stripeLogger } from "@/lib/stripe/logger";
 import type { OrderDetails } from "@/lib/email";
@@ -349,17 +350,122 @@ export async function processCompletedOrder(
 export async function handleExpiredSession(
   session: Stripe.Checkout.Session,
 ): Promise<void> {
-  const customerEmail =
-    session.customer_details?.email || session.customer_email;
+  try {
+    const userId = session.metadata?.userId;
+    if (!userId) {
+      stripeLogger.info("Session expired without userId, skipping abandoned cart email", {
+        sessionId: session.id,
+      });
+      return;
+    }
 
-  stripeLogger.info("Session expired", {
-    sessionId: session.id,
-    details: {
-      userId: session.metadata?.userId,
+    // Idempotency check: don't send duplicate emails for the same session
+    const alreadySent = await abandonedCartEmailsRepository.existsByStripeSessionId(session.id);
+    if (alreadySent) {
+      stripeLogger.info("Abandoned cart email already sent for this session", {
+        sessionId: session.id,
+        details: { userId },
+      });
+      return;
+    }
+
+    // Cooldown check: don't spam users with multiple emails
+    const withinCooldown = await abandonedCartEmailsRepository.isWithinCooldown(userId, 24);
+    if (withinCooldown) {
+      stripeLogger.info("User within cooldown window, skipping abandoned cart email", {
+        sessionId: session.id,
+        details: { userId },
+      });
+      return;
+    }
+
+    const customerEmail =
+      session.customer_details?.email || session.customer_email;
+    const customerName =
+      session.customer_details?.name || "Valued Customer";
+
+    if (!customerEmail) {
+      stripeLogger.info("No customer email available, skipping abandoned cart email", {
+        sessionId: session.id,
+        details: { userId },
+      });
+      return;
+    }
+
+    // Get line items for the abandoned cart
+    const lineItems = await getLineItemsFromSession(session.id);
+
+    const cartItemsHtml = lineItems
+      .map((item) => {
+        const product = item.price?.product as Stripe.Product | undefined;
+        const name = product?.name || item.description || "Unknown item";
+        const amount = item.amount_total ? (item.amount_total / 100).toFixed(2) : "0.00";
+        return `<li>${name} — ${amount}€</li>`;
+      })
+      .join("");
+
+    const totalAmount = session.amount_total
+      ? (session.amount_total / 100).toFixed(2)
+      : "0.00";
+
+    const message = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h2 style="color: #333;">You left something behind!</h2>
+        <p>Hello <strong>${customerName}</strong>,</p>
+        <p>We noticed you didn't complete your purchase. Here's what was in your cart:</p>
+        
+        <ul style="padding: 15px; background-color: #f5f5f5; border-radius: 5px; list-style: none;">
+          ${cartItemsHtml || "<li>Your cart items</li>"}
+        </ul>
+
+        <p style="font-size: 18px;"><strong>Total: ${totalAmount}€</strong></p>
+        
+        <p>Ready to complete your purchase? Visit our store to pick up where you left off.</p>
+        
+        <p style="color: #666; font-size: 12px; margin-top: 30px;">
+          If you've already completed your purchase or no longer wish to receive these emails, please disregard this message.
+        </p>
+      </div>
+    `;
+
+    // Send the abandoned cart email
+    const emailPayload = {
+      name: customerName,
+      email: customerEmail,
+      message,
+      subject: "You left items in your cart!",
+    };
+
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/email`,
+      {
+        method: "POST",
+        body: JSON.stringify(emailPayload),
+      },
+    );
+
+    if (!response.ok) {
+        stripeLogger.error("Failed to send abandoned cart email", undefined, {
+          sessionId: session.id,
+          details: { status: response.status },
+        });
+      return;
+    }
+
+    // Record the send for dedup/cooldown tracking
+    await abandonedCartEmailsRepository.create({
+      userId,
+      stripeSessionId: session.id,
       customerEmail,
-      amount: session.amount_total,
-    },
-  });
+      cartTotal: session.amount_total ?? 0,
+      sentAt: new Date(),
+    });
 
-  // TODO: Implement abandoned cart email / analytics
+    stripeLogger.info("Abandoned cart email sent successfully", {
+      sessionId: session.id,
+      details: { userId, customerEmail },
+    });
+  } catch (error) {
+    stripeLogger.error("Error in handleExpiredSession", error);
+  }
 }
