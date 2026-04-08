@@ -89,6 +89,15 @@ export {
   type AddToWishlistInput,
 } from "./wishlist";
 
+// Abandoned Cart Emails
+export {
+  abandonedCartEmails,
+  selectAbandonedCartEmailSchema,
+  insertAbandonedCartEmailSchema,
+  type AbandonedCartEmail,
+  type InsertAbandonedCartEmail,
+} from "./abandonedCartEmails";
+
 // Relations
 export {
   usersRelations,
@@ -99,4 +108,5 @@ export {
   customerInfoRelations,
   orderProductsRelations,
   wishlistRelations,
+  abandonedCartEmailsRelations,
 } from "./relations";

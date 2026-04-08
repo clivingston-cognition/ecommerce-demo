@@ -4,11 +4,13 @@ import { productsItems, productsVariants } from "./products";
 import { cartItems } from "./cart";
 import { orderItems, customerInfo, orderProducts } from "./orders";
 import { wishlist } from "./wishlist";
+import { abandonedCartEmails } from "./abandonedCartEmails";
 
 export const usersRelations = relations(users, ({ many }) => ({
   cartItems: many(cartItems),
   orders: many(orderItems),
   wishlist: many(wishlist),
+  abandonedCartEmails: many(abandonedCartEmails),
 }));
 
 export const productsItemsRelations = relations(productsItems, ({ many }) => ({
@@ -77,5 +79,12 @@ export const wishlistRelations = relations(wishlist, ({ one }) => ({
   product: one(productsItems, {
     fields: [wishlist.productId],
     references: [productsItems.id],
+  }),
+}));
+
+export const abandonedCartEmailsRelations = relations(abandonedCartEmails, ({ one }) => ({
+  user: one(users, {
+    fields: [abandonedCartEmails.userId],
+    references: [users.id],
   }),
 }));
