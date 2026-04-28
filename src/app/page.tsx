@@ -31,31 +31,26 @@ const ErrorComponent = () => {
 };
 
 const AllProducts = async () => {
-  try {
-    const products = await getAllProducts();
+  const products = await getAllProducts();
 
-    if (!products || products.length === 0) {
-      return (
-        <div className="flex flex-col items-center justify-center min-h-[50vh]">
-          <h2 className="text-xl font-bold">No products available</h2>
-          <p className="mt-2 text-gray-600">
-            Check back later to see our products
-          </p>
-        </div>
-      );
-    }
-
+  if (!products || products.length === 0) {
     return (
-      <GridProducts>
-        {products.map((product) => (
-          <ProductItem key={product.id} product={product} />
-        ))}
-      </GridProducts>
+      <div className="flex flex-col items-center justify-center min-h-[50vh]">
+        <h2 className="text-xl font-bold">No products available</h2>
+        <p className="mt-2 text-gray-600">
+          Check back later to see our products
+        </p>
+      </div>
     );
-  } catch (error) {
-    console.error("Error loading products:", error);
-    throw new Error("Error loading products");
   }
+
+  return (
+    <GridProducts>
+      {products.map((product) => (
+        <ProductItem key={product.id} product={product} />
+      ))}
+    </GridProducts>
+  );
 };
 
 export default Home;
