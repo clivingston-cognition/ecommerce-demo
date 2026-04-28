@@ -95,8 +95,8 @@ const Orders = async () => {
         </div>
         <h2 className="text-3xl font-bold">No Orders Yet</h2>
         <p className="text-center text-muted-foreground max-w-md">
-          Start shopping and your orders will appear here. We'll keep track of
-          everything for you!
+          Start shopping and your orders will appear here. We&apos;ll keep track
+          of everything for you!
         </p>
         <Link
           className="flex font-medium items-center bg-color-secondary justify-center text-sm min-w-[160px] h-[40px] px-6 rounded-lg transition-all hover:bg-border-secondary text-background-primary"
