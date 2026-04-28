@@ -1,6 +1,7 @@
 import Stripe from "stripe";
 import { CustomerInfo, OrderItem, OrderProduct } from "@/lib/db/drizzle/schema";
 import { getAllProducts } from "@/app/actions";
+import { sendMailDirect } from "./mailer";
 
 type OrderDetails = {
   order: OrderItem;
@@ -130,29 +131,20 @@ async function sendCustomerEmail(
   data: Stripe.Checkout.Session,
   orderDetails: OrderDetails,
 ) {
-  const message = await formatOrderEmail(orderDetails);
+  const html = await formatOrderEmail(orderDetails);
+  const email = data?.customer_details?.email;
 
-  const emailCustomer = {
-    name: data?.customer_details?.name,
-    email: data?.customer_details?.email,
-    message,
-    subject: "Order Confirmation - Purchase Receipt",
-  };
+  if (!email) {
+    throw new Error("Customer email not available from Stripe session");
+  }
 
   try {
-    const responseCustomer = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/email`,
-      {
-        method: "POST",
-        body: JSON.stringify(emailCustomer),
-      },
-    );
-
-    if (!responseCustomer.ok) {
-      throw new Error(`response status: ${responseCustomer.status}`);
-    } else {
-      console.log("Customer's email successfully sent");
-    }
+    await sendMailDirect({
+      to: email,
+      subject: "Order Confirmation - Purchase Receipt",
+      html,
+    });
+    console.log("Customer's email successfully sent");
   } catch (err) {
     console.error("Error sending customer's email:", err);
     throw err;
@@ -213,27 +205,18 @@ async function sendOwnerEmail(
     </div>
   `;
 
-  const emailOwner = {
-    name: process.env.NEXT_PUBLIC_PERSONAL_EMAIL,
-    email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL,
-    message: message,
-    subject: `New Order #${orderDetails.order.orderNumber}`,
-  };
+  const ownerEmail = process.env.NEXT_PUBLIC_PERSONAL_EMAIL;
+  if (!ownerEmail) {
+    throw new Error("NEXT_PUBLIC_PERSONAL_EMAIL is not configured");
+  }
 
   try {
-    const responseEmailOwner = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/email`,
-      {
-        method: "POST",
-        body: JSON.stringify(emailOwner),
-      },
-    );
-
-    if (!responseEmailOwner.ok) {
-      throw new Error(`response status: ${responseEmailOwner.status}`);
-    } else {
-      console.log("Owner's email sent correctly");
-    }
+    await sendMailDirect({
+      to: ownerEmail,
+      subject: `New Order #${orderDetails.order.orderNumber}`,
+      html: message,
+    });
+    console.log("Owner's email sent correctly");
   } catch (err) {
     console.error("Error sending owner's email:", err);
     throw err;
