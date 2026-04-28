@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
+import { getUser } from "@/lib/auth/server";
 
 export async function GET(req: NextRequest) {
+  const user = await getUser();
+  if (!user) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const query = new URL(req.url).searchParams;
   const sessionId = query.get("session_id");
 

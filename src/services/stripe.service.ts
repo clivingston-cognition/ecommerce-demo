@@ -201,25 +201,13 @@ export async function fetchCheckoutData(
   sessionId: string,
 ): Promise<CheckoutResult> {
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/stripe/checkout_sessions?session_id=${sessionId}`,
-    );
-
-    if (!res.ok) {
-      if (res.status === 404) {
-        return { status: "not_found", error: "Session not found" };
-      }
-      return { status: "error", error: `Server error: ${res.status}` };
+    if (!sessionId || !sessionId.startsWith("cs_")) {
+      return { status: "not_found", error: "Invalid session ID" };
     }
 
-    const data = await res.json();
-
-    // API returns error object on invalid session
-    if ("statusCode" in data && data.statusCode === 500) {
-      return { status: "not_found", error: data.message || "Invalid session" };
-    }
-
-    const session = data as Stripe.Checkout.Session;
+    const session = await stripe.checkout.sessions.retrieve(sessionId, {
+      expand: ["payment_intent"],
+    });
 
     // Map Stripe session status to our status
     if (session.status === "complete" && session.payment_status === "paid") {
