@@ -11,7 +11,7 @@ function escapeHtml(str: string): string {
 }
 
 export async function POST(request: NextRequest) {
-  const { name, email, message, subject } = await request.json();
+  const { name, email, message, subject, isHtml } = await request.json();
 
   if (!name || !email || !message || !subject) {
     return NextResponse.json(
@@ -29,15 +29,19 @@ export async function POST(request: NextRequest) {
     },
   });
 
+  const htmlBody = isHtml
+    ? message
+    : `
+            <p>Hello ${escapeHtml(name)}!</p>
+            <p>${escapeHtml(message)}</p>
+            `;
+
   const mailOptions = {
     from: process.env.EMAIL_USERNAME,
     to: email,
     replyTo: process.env.PERSONAL_EMAIL,
     subject: subject,
-    html: `
-            <p>Hello ${escapeHtml(name)}!</p>
-            <p>${escapeHtml(message)}</p>
-            `,
+    html: htmlBody,
   };
 
   try {
