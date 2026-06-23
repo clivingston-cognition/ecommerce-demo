@@ -73,12 +73,30 @@ export const orderItems = pgTable(
     index("idx_order_items_created_at").on(table.createdAt),
     index("idx_order_items_delivery_date").on(table.deliveryDate),
     index("idx_order_items_user_created").on(table.userId, table.createdAt),
-    pgPolicy("Allow all order operations", {
+    pgPolicy("Users can view own orders", {
       as: "permissive",
-      for: "all",
+      for: "select",
       to: "public",
-      using: sql`true`,
-      withCheck: sql`true`,
+      using: sql`app.current_user_id() = user_id`,
+    }),
+    pgPolicy("Users can insert own orders", {
+      as: "permissive",
+      for: "insert",
+      to: "public",
+      withCheck: sql`app.current_user_id() = user_id`,
+    }),
+    pgPolicy("Users can update own orders", {
+      as: "permissive",
+      for: "update",
+      to: "public",
+      using: sql`app.current_user_id() = user_id`,
+      withCheck: sql`app.current_user_id() = user_id`,
+    }),
+    pgPolicy("Users can delete own orders", {
+      as: "permissive",
+      for: "delete",
+      to: "public",
+      using: sql`app.current_user_id() = user_id`,
     }),
   ]
 );
@@ -108,12 +126,30 @@ export const customerInfo = pgTable(
     index("idx_customer_info_order_id").on(table.orderId),
     index("idx_customer_info_stripe_order_id").on(table.stripeOrderId),
     index("idx_customer_info_email").on(table.email),
-    pgPolicy("Allow all customer info operations", {
+    pgPolicy("Users can view own customer info", {
       as: "permissive",
-      for: "all",
+      for: "select",
       to: "public",
-      using: sql`true`,
-      withCheck: sql`true`,
+      using: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
+    }),
+    pgPolicy("Users can insert own customer info", {
+      as: "permissive",
+      for: "insert",
+      to: "public",
+      withCheck: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
+    }),
+    pgPolicy("Users can update own customer info", {
+      as: "permissive",
+      for: "update",
+      to: "public",
+      using: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
+      withCheck: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
+    }),
+    pgPolicy("Users can delete own customer info", {
+      as: "permissive",
+      for: "delete",
+      to: "public",
+      using: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
     }),
   ]
 );
@@ -147,12 +183,30 @@ export const orderProducts = pgTable(
     index("idx_order_products_order_id").on(table.orderId),
     index("idx_order_products_variant_id").on(table.variantId),
     check("order_quantity_positive", sql`quantity > 0`),
-    pgPolicy("Allow all order products operations", {
+    pgPolicy("Users can view own order products", {
       as: "permissive",
-      for: "all",
+      for: "select",
       to: "public",
-      using: sql`true`,
-      withCheck: sql`true`,
+      using: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
+    }),
+    pgPolicy("Users can insert own order products", {
+      as: "permissive",
+      for: "insert",
+      to: "public",
+      withCheck: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
+    }),
+    pgPolicy("Users can update own order products", {
+      as: "permissive",
+      for: "update",
+      to: "public",
+      using: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
+      withCheck: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
+    }),
+    pgPolicy("Users can delete own order products", {
+      as: "permissive",
+      for: "delete",
+      to: "public",
+      using: sql`EXISTS (SELECT 1 FROM order_items WHERE order_items.id = order_id AND order_items.user_id = app.current_user_id())`,
     }),
   ]
 );

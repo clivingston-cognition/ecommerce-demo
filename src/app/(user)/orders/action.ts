@@ -50,7 +50,7 @@ export const getOrder = async (
       return null;
     }
 
-    const order = await ordersRepository.findById(orderId);
+    const order = await ordersRepository.findById(userId, orderId);
 
     if (!order || order.userId !== userId) {
       return null;
@@ -93,6 +93,7 @@ export async function createOrderItem(
  * Save customer info from Stripe session
  */
 export async function saveCustomerInfo(
+  userId: string,
   orderId: number,
   session: Stripe.Checkout.Session,
 ): Promise<CustomerInfo | null> {
@@ -114,6 +115,7 @@ export async function saveCustomerInfo(
   });
 
   const customerInfo = await ordersRepository.addCustomerInfo(
+    userId,
     orderId,
     customerInfoToSave,
   );
@@ -139,6 +141,7 @@ export async function saveCustomerInfo(
 }
 
 export async function saveOrderProducts(
+  userId: string,
   orderId: number,
   lineItems: Stripe.LineItem[],
   cartItems: MinimalCartItem[],
@@ -168,6 +171,7 @@ export async function saveOrderProducts(
   }
 
   const savedProducts = await ordersRepository.addProducts(
+    userId,
     orderId,
     orderProductsData,
   );
