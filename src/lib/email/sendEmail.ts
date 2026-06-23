@@ -137,6 +137,7 @@ async function sendCustomerEmail(
     email: data?.customer_details?.email,
     message,
     subject: "Order Confirmation - Purchase Receipt",
+    isHtml: true,
   };
 
   try {
@@ -214,10 +215,11 @@ async function sendOwnerEmail(
   `;
 
   const emailOwner = {
-    name: process.env.NEXT_PUBLIC_PERSONAL_EMAIL,
-    email: process.env.NEXT_PUBLIC_PERSONAL_EMAIL,
+    name: process.env.PERSONAL_EMAIL,
+    email: process.env.PERSONAL_EMAIL,
     message: message,
     subject: `New Order #${orderDetails.order.orderNumber}`,
+    isHtml: true,
   };
 
   try {
