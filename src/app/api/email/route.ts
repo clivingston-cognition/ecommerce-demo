@@ -1,6 +1,15 @@
 import { NextResponse, NextRequest } from "next/server";
 import nodemailer from "nodemailer";
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(request: NextRequest) {
   const { name, email, message, subject } = await request.json();
 
@@ -15,22 +24,19 @@ export async function POST(request: NextRequest) {
     host: "smtp.gmail.com",
     service: "gmail",
     auth: {
-      user: process.env.NEXT_PUBLIC_EMAIL_USERNAME,
-      pass: process.env.NEXT_PUBLIC_EMAIL_PASSWORD,
-    },
-    tls: {
-      rejectUnauthorized: false,
+      user: process.env.EMAIL_USERNAME,
+      pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   const mailOptions = {
-    from: process.env.NEXT_PUBLIC_EMAIL_USERNAME,
+    from: process.env.EMAIL_USERNAME,
     to: email,
-    replyTo: process.env.NEXT_PUBLIC_PERSONAL_EMAIL,
+    replyTo: process.env.PERSONAL_EMAIL,
     subject: subject,
-    html: ` 
-            <p>Hello ${name}!</p>
-            <p>${message}</p>
+    html: `
+            <p>Hello ${escapeHtml(name)}!</p>
+            <p>${escapeHtml(message)}</p>
             `,
   };
 
@@ -40,7 +46,7 @@ export async function POST(request: NextRequest) {
       { message: "Email sent successfully!" },
       { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error(error);
     return NextResponse.json(
       { message: "COULT NOT SEND THE MESSAGE" },
