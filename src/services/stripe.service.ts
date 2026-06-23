@@ -293,7 +293,11 @@ async function getCartItemsFromMetadata(
 export async function processCompletedOrder(
   session: Stripe.Checkout.Session,
 ): Promise<OrderDetails> {
+  const userId = session.metadata?.userId;
+  if (!userId) throw new Error("Missing userId in session metadata");
+
   const existingOrder = await ordersRepository.findByStripeSessionId(
+    userId,
     session.id,
   );
   if (existingOrder) {
@@ -319,9 +323,6 @@ export async function processCompletedOrder(
     };
   }
 
-  const userId = session.metadata?.userId;
-  if (!userId) throw new Error("Missing userId in session metadata");
-
   const cartItems = await getCartItemsFromMetadata(session.metadata, userId);
   if (!cartItems.length) throw new Error("No cart items found for user");
 
@@ -330,8 +331,9 @@ export async function processCompletedOrder(
 
   const orderNumber = await ordersRepository.getNextOrderNumber();
   const orderData = await createOrderItem(userId, orderNumber);
-  const savedCustomerInfo = await saveCustomerInfo(orderData.id, session);
+  const savedCustomerInfo = await saveCustomerInfo(userId, orderData.id, session);
   const savedOrderProducts = await saveOrderProducts(
+    userId,
     orderData.id,
     lineItems,
     cartItems,

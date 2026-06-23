@@ -19,10 +19,11 @@ export async function getUserOrders(
 }
 
 export async function getOrderById(
+  userId: string,
   orderId: number,
 ): Promise<OrderWithDetails | null> {
   try {
-    return await ordersRepository.findById(orderId);
+    return await ordersRepository.findById(userId, orderId);
   } catch (error) {
     console.error("Error fetching order:", error);
     return null;
@@ -30,10 +31,11 @@ export async function getOrderById(
 }
 
 export async function getOrderByNumber(
+  userId: string,
   orderNumber: number,
 ): Promise<OrderWithDetails | null> {
   try {
-    return await ordersRepository.findByOrderNumber(orderNumber);
+    return await ordersRepository.findByOrderNumber(userId, orderNumber);
   } catch (error) {
     console.error("Error fetching order by number:", error);
     return null;
@@ -77,11 +79,12 @@ export async function createCompleteOrder(
 }
 
 export async function addCustomerInfoToOrder(
+  userId: string,
   orderId: number,
   customerData: Omit<InsertCustomerInfo, "orderId">,
 ) {
   try {
-    return await ordersRepository.addCustomerInfo(orderId, customerData);
+    return await ordersRepository.addCustomerInfo(userId, orderId, customerData);
   } catch (error) {
     console.error("Error adding customer info:", error);
     return null;
@@ -89,11 +92,12 @@ export async function addCustomerInfoToOrder(
 }
 
 export async function addProductsToOrder(
+  userId: string,
   orderId: number,
   products: Omit<InsertOrderProduct, "orderId">[],
 ) {
   try {
-    return await ordersRepository.addProducts(orderId, products);
+    return await ordersRepository.addProducts(userId, orderId, products);
   } catch (error) {
     console.error("Error adding products to order:", error);
     return null;

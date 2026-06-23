@@ -1,5 +1,5 @@
 import { eq, desc } from "drizzle-orm";
-import { db } from "../connection";
+import { db, withRLS, withRLSTransaction } from "../connection";
 import {
   orderItems,
   orderProducts,
@@ -19,50 +19,66 @@ export const ordersRepository = {
   /**
    * Check if an order already exists by Stripe session ID (idempotency check)
    */
-  async existsByStripeSessionId(stripeSessionId: string): Promise<boolean> {
-    const existing = await db.query.customerInfo.findFirst({
-      where: eq(customerInfo.stripeOrderId, stripeSessionId),
+  async existsByStripeSessionId(
+    userId: string,
+    stripeSessionId: string,
+  ): Promise<boolean> {
+    return withRLS(userId, async () => {
+      const existing = await db.query.customerInfo.findFirst({
+        where: eq(customerInfo.stripeOrderId, stripeSessionId),
+      });
+      return !!existing;
     });
-    return !!existing;
   },
 
   /**
    * Find order by Stripe session ID
    */
   async findByStripeSessionId(
+    userId: string,
     stripeSessionId: string,
   ): Promise<OrderWithDetails | null> {
-    const customer = await db.query.customerInfo.findFirst({
-      where: eq(customerInfo.stripeOrderId, stripeSessionId),
+    return withRLS(userId, async () => {
+      const customer = await db.query.customerInfo.findFirst({
+        where: eq(customerInfo.stripeOrderId, stripeSessionId),
+      });
+
+      if (!customer) return null;
+
+      return this.findByIdInternal(customer.orderId);
     });
-
-    if (!customer) return null;
-
-    return this.findById(customer.orderId);
   },
 
   async findByUserId(userId: string): Promise<OrderWithDetails[]> {
-    const orders = await db.query.orderItems.findMany({
-      where: eq(orderItems.userId, userId),
-      with: {
-        customerInfo: true,
-        orderProducts: {
-          with: {
-            variant: {
-              with: {
-                product: true,
+    return withRLS(userId, async () => {
+      const orders = await db.query.orderItems.findMany({
+        where: eq(orderItems.userId, userId),
+        with: {
+          customerInfo: true,
+          orderProducts: {
+            with: {
+              variant: {
+                with: {
+                  product: true,
+                },
               },
             },
           },
         },
-      },
-      orderBy: [desc(orderItems.createdAt)],
-    });
+        orderBy: [desc(orderItems.createdAt)],
+      });
 
-    return orders.map(transformOrderWithDetails);
+      return orders.map(transformOrderWithDetails);
+    });
   },
 
-  async findById(id: number): Promise<OrderWithDetails | null> {
+  async findById(userId: string, id: number): Promise<OrderWithDetails | null> {
+    return withRLS(userId, async () => {
+      return this.findByIdInternal(id);
+    });
+  },
+
+  async findByIdInternal(id: number): Promise<OrderWithDetails | null> {
     const order = await db.query.orderItems.findFirst({
       where: eq(orderItems.id, id),
       with: {
@@ -83,25 +99,28 @@ export const ordersRepository = {
   },
 
   async findByOrderNumber(
+    userId: string,
     orderNumber: number,
   ): Promise<OrderWithDetails | null> {
-    const order = await db.query.orderItems.findFirst({
-      where: eq(orderItems.orderNumber, orderNumber),
-      with: {
-        customerInfo: true,
-        orderProducts: {
-          with: {
-            variant: {
-              with: {
-                product: true,
+    return withRLS(userId, async () => {
+      const order = await db.query.orderItems.findFirst({
+        where: eq(orderItems.orderNumber, orderNumber),
+        with: {
+          customerInfo: true,
+          orderProducts: {
+            with: {
+              variant: {
+                with: {
+                  product: true,
+                },
               },
             },
           },
         },
-      },
-    });
+      });
 
-    return order ? transformOrderWithDetails(order) : null;
+      return order ? transformOrderWithDetails(order) : null;
+    });
   },
 
   async createComplete(
@@ -109,7 +128,7 @@ export const ordersRepository = {
     customerData: Omit<InsertCustomerInfo, "orderId">,
     products: Omit<InsertOrderProduct, "orderId">[],
   ): Promise<OrderWithDetails | null> {
-    return await db.transaction(async (tx) => {
+    return withRLSTransaction(orderData.userId, async (tx) => {
       const [newOrder] = await tx
         .insert(orderItems)
         .values({
@@ -140,60 +159,68 @@ export const ordersRepository = {
         })),
       );
 
-      return this.findById(newOrder.id);
+      return this.findByIdInternal(newOrder.id);
     });
   },
 
   async create(data: InsertOrderItem): Promise<OrderItem | null> {
-    const [result] = await db
-      .insert(orderItems)
-      .values({
-        userId: data.userId,
-        deliveryDate: data.deliveryDate,
-        orderNumber: data.orderNumber,
-      })
-      .returning();
+    return withRLS(data.userId, async () => {
+      const [result] = await db
+        .insert(orderItems)
+        .values({
+          userId: data.userId,
+          deliveryDate: data.deliveryDate,
+          orderNumber: data.orderNumber,
+        })
+        .returning();
 
-    return result ? transformOrderItem(result) : null;
+      return result ? transformOrderItem(result) : null;
+    });
   },
 
   async addCustomerInfo(
+    userId: string,
     orderId: number,
     data: Omit<InsertCustomerInfo, "orderId">,
   ) {
-    const [result] = await db
-      .insert(customerInfo)
-      .values({
-        orderId,
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        address: data.address,
-        stripeOrderId: data.stripeOrderId,
-        totalPrice: data.totalPrice,
-      })
-      .returning();
+    return withRLS(userId, async () => {
+      const [result] = await db
+        .insert(customerInfo)
+        .values({
+          orderId,
+          name: data.name,
+          email: data.email,
+          phone: data.phone,
+          address: data.address,
+          stripeOrderId: data.stripeOrderId,
+          totalPrice: data.totalPrice,
+        })
+        .returning();
 
-    return result;
+      return result;
+    });
   },
 
   async addProducts(
+    userId: string,
     orderId: number,
     products: Omit<InsertOrderProduct, "orderId">[],
   ) {
-    const result = await db
-      .insert(orderProducts)
-      .values(
-        products.map((p) => ({
-          orderId,
-          variantId: p.variantId,
-          quantity: p.quantity,
-          size: p.size,
-        })),
-      )
-      .returning();
+    return withRLS(userId, async () => {
+      const result = await db
+        .insert(orderProducts)
+        .values(
+          products.map((p) => ({
+            orderId,
+            variantId: p.variantId,
+            quantity: p.quantity,
+            size: p.size,
+          })),
+        )
+        .returning();
 
-    return result;
+      return result;
+    });
   },
 
   async getNextOrderNumber(): Promise<number> {
